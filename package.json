@@ -11,6 +11,8 @@
     "bootstrap-social": "^5.1.1",
     "cross-fetch": "^3.0.6",
     "font-awesome": "^4.7.0",
+    "material-design-icons": "^3.0.1",
+    "materialize-css": "^1.0.0-rc.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-animation-component": "^0.2.3",

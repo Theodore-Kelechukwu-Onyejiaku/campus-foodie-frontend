@@ -1,7 +1,11 @@
 import React from "react";
+import FoodList from "../Food/FoodList"
 
 export default function Home(){
     return(
-        <div>Welcome to Campus Foodie!</div>
+        <div>
+                <div>Welcome to Campus Foodie!</div>
+                < FoodList />
+        </div>
     )
 }
