@@ -6,18 +6,24 @@ import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
 import Signup from "./Authentication/Signup";
 import Login from "./Authentication/Login";
+import Earn from "./Earn/Earn";
+import About from "./Pages/About";
 
 const Main  = () =>{
     return (
         <BrowserRouter>
             <Header/>
+                <div className="container">
                 <Switch>
                     <Route path="/" component={Home} exact/>
                     <Route path="/cart-list" component={CartList} exact/>
                     <Route path="/signup" component={Signup} exact/>
                     <Route path="/login" component={Login} exact/>
+                    <Route path="/earn" component={Earn} />
+                    <Route path="/" component={About} />
                     <Redirect to="/" />
                 </Switch>
+                </div>
             <Footer/>
         </BrowserRouter>
     )
