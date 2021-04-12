@@ -10,7 +10,7 @@
 }
 
 .page-exit{
-    opeacity: 1;
+    opacity: 1;
     transform: translateX(0%)
 }
 
@@ -20,6 +20,51 @@
     transition: all 300ms ease-in
 }
 
-.active {
-    background-color: blue /*#ee6e73;*/
+.active-link{
+    background-color: #26a69a /*#ee6e73;*/
+}
+
+span.field-icon {
+    float: right;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.social-link{
+    padding:5%;
+    margin-bottom: 2%;
+    color:white;
+    font-size:150%;
+}
+
+.social-link.center-align i,span{
+    color:white;
+}
+
+.social-link i{
+    float:left;
+}
+
+.social-link.facebook{
+    background-color: #3b5998;
+}
+
+.social-link.twitter{
+    background-color: #00aced;
+}
+
+.social-link.google{
+    background-color: #dd4b39;
+}
+
+
+#mobile-demo{
+    background-color: #ee6e73;
+}
+
+#mobile-demo .side-link{
+    color: white;
 }

@@ -20,7 +20,7 @@ const Main  = () =>{
                     <Route path="/signup" component={Signup} exact/>
                     <Route path="/login" component={Login} exact/>
                     <Route path="/earn" component={Earn} />
-                    <Route path="/" component={About} />
+                    <Route path="/about" component={About} />
                     <Redirect to="/" />
                 </Switch>
                 </div>
