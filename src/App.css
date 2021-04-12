@@ -1,3 +1,15 @@
+body{
+    position:relative;
+}
+
+.page-footer{ 
+   position:relative;
+   bottom:0;
+   width:100%;
+   height:auto;   /* Height of the footer */
+}
+
+
 .page-enter{
     opacity: 0.01;
     transform: translateX(-100%)
@@ -67,4 +79,8 @@ span.field-icon {
 
 #mobile-demo .side-link{
     color: white;
+}
+
+.top-margin{
+    margin-top:5%;
 }

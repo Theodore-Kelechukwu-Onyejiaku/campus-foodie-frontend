@@ -6,7 +6,7 @@ export default function FoodList() {
             <div className="col s12 m4">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://picsum.photos/100/100" />
+                        <img class="activator" src="https://picsum.photos/100/100" alt="dish"/>
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">more_vert</i></span>
@@ -21,7 +21,7 @@ export default function FoodList() {
             <div className="col s12 m4">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://picsum.photos/100/100" />
+                        <img class="activator" src="https://picsum.photos/100/100"  alt="dish"/>
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">more_vert</i></span>
@@ -36,7 +36,7 @@ export default function FoodList() {
             <div className="col s12 m4">
                 <div class="card">
                     <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://picsum.photos/100/100" />
+                        <img class="activator" src="https://picsum.photos/100/100" alt="dish"/>
                     </div>
                     <div class="card-content">
                         <span class="card-title activator grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">more_vert</i></span>

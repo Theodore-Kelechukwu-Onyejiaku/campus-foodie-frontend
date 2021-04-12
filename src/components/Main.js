@@ -8,6 +8,7 @@ import Signup from "./Authentication/Signup";
 import Login from "./Authentication/Login";
 import Earn from "./Earn/Earn";
 import About from "./Pages/About";
+import AddProduct from "./Admin/AddProduct"
 
 const Main  = () =>{
     return (
@@ -21,6 +22,7 @@ const Main  = () =>{
                     <Route path="/login" component={Login} exact/>
                     <Route path="/earn" component={Earn} />
                     <Route path="/about" component={About} />
+                    <Route path="/add-product" component={AddProduct} />
                     <Redirect to="/" />
                 </Switch>
                 </div>
