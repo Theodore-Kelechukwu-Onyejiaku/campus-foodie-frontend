@@ -36,6 +36,18 @@ body{
     background-color: #26a69a /*#ee6e73;*/
 }
 
+.successMessage{
+    width:50%;
+    margin:auto;
+    padding:1%;
+}
+
+.errorMessage{
+    width:50%;
+    margin:auto;
+    padding:1%;
+}
+
 span.field-icon {
     float: right;
     position: absolute;
@@ -84,3 +96,29 @@ span.field-icon {
 .top-margin{
     margin-top:5%;
 }
+
+
+/*START DISH CARD */
+.card-body{
+    padding:5%;
+}
+
+.card-body .chip{
+    font-size: 150%;
+}
+
+@media only screen and (min-width: 600px){
+    .card{
+        height:400px;
+        width:100%;
+    }
+
+    .card-body{
+        position: absolute;
+        width: 100%;
+        bottom: 0%;
+        z-index:1;
+    }
+}
+
+/* END DISH CARD */

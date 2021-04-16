@@ -6,23 +6,23 @@ export default function Login() {
         <div className="row" style={{marginTop:"5%"}}>
             <div className="col s0 m3 l4"></div>
             <div className="col s12 m6 l4">
-                <div class="row">
-                    <form class="col s12">
+                <div className="row">
+                    <form className="col s12">
                         <h5 className="center-align">Welcome To Campus Foodie!</h5>
                         <h4 className="center-align" style={{fontFamily: "'Tangerine', cursive"}}>Please Login</h4>
-                        <div class="row">
-                            <div class="input-field col s12">
-                                <input id="icon_prefix" type="text" class="validate" />
+                        <div className="row">
+                            <div className="input-field col s12">
+                                <input id="icon_prefix" type="text" className="validate" />
                                 <label for="icon_prefix">Email</label>
                             </div>
-                            <div class="input-field col s12">
-                                <input id="icon_telephone" type="password" class="validate" />
+                            <div className="input-field col s12">
+                                <input id="icon_telephone" type="password" className="validate" />
                                 <label for="icon_telephone">Password</label>
-                                <span toggle="#confirm-password" class="field-icon toggle-password">
-                                    <span class="material-icons">visibility</span>
+                                <span toggle="#confirm-password" className="field-icon toggle-password">
+                                    <span className="material-icons">visibility</span>
                                 </span>
                             </div>
-                            <button class="btn pulse">Login</button>
+                            <button className="btn pulse">Login</button>
                         </div>
                     </form>
                     <div className="right-align">

@@ -1,54 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-export default function FoodList() {
+export default function FoodList({ dishes }) {
     return (
         <div className="row">
-            <div className="col s12 m4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://picsum.photos/100/100" alt="dish"/>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">more_vert</i></span>
-                        <button className='waves-effect waves-light btn'>Add to Cart</button>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-            <div className="col s12 m4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://picsum.photos/100/100"  alt="dish"/>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">more_vert</i></span>
-                        <button className='btn pulse'>Add to Cart</button>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4">Food Name<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
+            {dishes.map(dish =>
+                <div className="col s12 m6 l4" key={dish._id} height="300px">
+                    <div className="card">
+                        <div className="card-image waves-effect waves-block waves-light">
+                            <img className="activator" src={dish.dishUrl} alt="dish" />
+                        </div>
+                        <div className="card-body">
+                            <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive" }}>{dish.name}{" "}₦{dish.price}<i className="material-icons right">more_vert</i></span>
+                            <br/>
+                            <button className='btn pulse'>Add to Cart</button>
+                            <hr/>
+                            <br/>
+                            {dish.categories.map((cat, index) =>
+                                <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive" }}>{cat}</div>
+                            )}
+                        </div>
+                        <div className="card-reveal">
+                            <span className="card-title grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive" }}>{dish.name}<i className="material-icons right">close</i></span>
+                            <p>{dish.description}</p>
+                            <hr/>
+                            {dish.categories.map((cat, index) =>
+                                <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive" }}>{cat}</div>
+                            )}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className="col s12 m4">
-                <div class="card">
-                    <div class="card-image waves-effect waves-block waves-light">
-                        <img class="activator" src="https://picsum.photos/100/100" alt="dish"/>
-                    </div>
-                    <div class="card-content">
-                        <span class="card-title activator grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">more_vert</i></span>
-                        <button className='btn pulse'>Add to Cart</button>
-                    </div>
-                    <div class="card-reveal">
-                        <span class="card-title grey-text text-darken-4" style={{fontFamily: "'Tangerine', cursive"}}>Food Name<i class="material-icons right">close</i></span>
-                        <p>Here is some more information about this product that is only revealed once clicked on.</p>
-                    </div>
-                </div>
-            </div>
-
+                
+            )}
         </div>
     )
 }
