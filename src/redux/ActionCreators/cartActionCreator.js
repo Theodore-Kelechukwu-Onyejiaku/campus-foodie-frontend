@@ -1,7 +1,4 @@
 import * as ActionTypes from "../ActionTypes";
-import { baseUrl } from "../../shared/baseUrl";
-import history from "../history";
-import { element } from "prop-types";
 
 
 const totalCart = (cart)=>{
@@ -25,10 +22,6 @@ export const addItem = (item) => (dispatch) =>{
         item["quantity"] = 1;
         arr.push(item);
         userCart = localStorage.setItem("cart", JSON.stringify(arr));
-        var total = 0
-        let numberOfItems = arr.forEach(element =>{
-            total = total + element["quantity"];
-        })
         let count = totalCart(arr)
         dispatch(addToCart(item, count));
         return

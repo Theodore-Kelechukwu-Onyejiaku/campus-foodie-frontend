@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import {FadeTransform, Fade, Stagger} from "react-animation-components";
+import React from "react";
+import {Fade, Stagger} from "react-animation-components";
 
 export default function FoodList({ dishes, addItem }) {
     return (

@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React from "react";
 import FoodList from "../Food/FoodList"
 import Loader from "../Layout/Loader"
 

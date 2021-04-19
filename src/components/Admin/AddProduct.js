@@ -6,7 +6,7 @@ const AddProduct = ({ dish, postDish }) => {
     useEffect(() => {
         window.addEventListener('load', function () {
             var elems = document.querySelectorAll('.chips');
-            var instances = M.Chips.init(elems);
+            M.Chips.init(elems);
         });
 
     }, [])
@@ -21,7 +21,6 @@ const AddProduct = ({ dish, postDish }) => {
  
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
-        // console.log(file.name)
         previewFile(file);
     }
 
@@ -39,7 +38,9 @@ const AddProduct = ({ dish, postDish }) => {
         reader.onloadend = () => {
             setPreviewSource(reader.result)
             setFileInputState(reader.result)
+            console.log(fileInputState)
             setSelectedFile(reader.result)
+            console.log(selectedFile)
             setFormData(Object.assign({}, formData, { dishPicture: reader.result }));
         }
     }

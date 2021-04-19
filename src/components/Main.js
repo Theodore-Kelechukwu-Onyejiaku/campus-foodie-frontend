@@ -34,13 +34,9 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const Main = (props) => {
-    const [stateCart, setStateCart] = useState([])
     useEffect(() => {
         props.getAllDishes();
-        setStateCart(props.cart.cart);
     }, [])
-    // setStateCart(props.cart);
-    console.log(props.cart["number"])
     return (
         <div>
             <Header cartLength={props.cart.number} />

@@ -1,6 +1,5 @@
 import * as ActionTypes from "../ActionTypes";
 import { baseUrl } from "../../shared/baseUrl";
-import history from "../history"
 
 export const addDishLoading = ()=>({
     type: ActionTypes.ADD_DISH_LOADING

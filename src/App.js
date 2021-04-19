@@ -13,7 +13,7 @@ export default function App(){
   useEffect(()=>{
     window.addEventListener('load', function() {
       var elems = document.querySelectorAll('.sidenav');
-      var instances = M.Sidenav.init(elems, {});
+      M.Sidenav.init(elems, {});
     });
       
   }, [])
