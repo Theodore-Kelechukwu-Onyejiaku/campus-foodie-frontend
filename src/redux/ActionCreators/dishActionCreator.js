@@ -1,15 +1,15 @@
-import * as ActionTypes from "./ActionTypes";
-import { baseUrl } from "../shared/baseUrl";
-import history from "./history"
+import * as ActionTypes from "../ActionTypes";
+import { baseUrl } from "../../shared/baseUrl";
+import history from "../history"
 
-export const dishLoading = ()=>({
-    type: ActionTypes.DISH_LOADING 
+export const addDishLoading = ()=>({
+    type: ActionTypes.ADD_DISH_LOADING
 })
 
 
-export const addDish = (resp) =>({
+export const addDish = (respMess, respData) =>({
     type: ActionTypes.ADD_DISH,
-    payload: resp
+    payload: {message: respMess, dishes: respData}
 })
 
 export const addDishFail = (err) =>({
@@ -19,11 +19,11 @@ export const addDishFail = (err) =>({
 
 
 export const postDish = (formData) => async (dispatch) => {
-    dispatch(dishLoading)
+    dispatch(addDishLoading)
     fetch(baseUrl+"api/dish/add-dish",{
         method: "POST",
         body: JSON.stringify(formData),
-        headers: {"Content-type": "application/json", 'Access-Control-Allow-Origin':"*"}
+        headers: {"Content-type": "application/json"}
     })
     .then(response => {
         if(response.ok) return response.json();
@@ -34,16 +34,10 @@ export const postDish = (formData) => async (dispatch) => {
         }
     })
     .then(async (result) =>{
-        console.log("before done")
-        await  dispatch(addDish(result.message));
-        setTimeout(()=>{
-            dispatch(dishLoading)
-            history.push("/")
-        }, 2000)
-        
+        await  dispatch(addDish(result.message, result.dish));    
     })
     .catch(error =>{
-        dispatch(addDishFail(error.message))
+        dispatch(addDishFail("Something went wrong!"))
     })
 }
 
@@ -65,7 +59,7 @@ export const getDishesLoading = ()=>({
 })
 
 export const getAllDishes = () => (dispatch)=>{
-    dispatch(dishLoading);
+    dispatch(getDishesLoading);
     fetch(baseUrl+"api/dish/all-dishes")
     .then(response =>{
         if(response.ok)  return response.json()
@@ -79,7 +73,7 @@ export const getAllDishes = () => (dispatch)=>{
         dispatch(getDishes(result.dishes));
     })
     .catch(error =>{
-        dispatch(getDishesFail(error.message))
+        dispatch(getDishesFail("Something went wrong!"))
     })
 }
 

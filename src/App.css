@@ -122,3 +122,9 @@ span.field-icon {
 }
 
 /* END DISH CARD */
+
+
+/* START OF CART LIST   */
+.right button.quantity{
+    background-color: #ee6e73;
+}

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-export default function FoodList({ dishes }) {
+export default function FoodList({ dishes, addItem }) {
     return (
         <div className="row">
             {dishes.map(dish =>
@@ -12,7 +12,7 @@ export default function FoodList({ dishes }) {
                         <div className="card-body">
                             <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive" }}>{dish.name}{" "}₦{dish.price}<i className="material-icons right">more_vert</i></span>
                             <br/>
-                            <button className='btn pulse'>Add to Cart</button>
+                            <button className='btn pulse' onClick={()=>{addItem(dish)}}>Add to Cart</button>
                             <hr/>
                             <br/>
                             {dish.categories.map((cat, index) =>

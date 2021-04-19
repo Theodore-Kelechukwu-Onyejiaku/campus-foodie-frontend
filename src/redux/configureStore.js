@@ -4,7 +4,8 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 // import { Comments} from "./comments";
 // import { Promotions} from "./promotions";
 // import { Leaders} from "./leaders";
-import {DishReducer} from "./dishReducer";
+import {dishReducer} from "./dishReducer";
+import {cartReducer} from "./cartReducer";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 
@@ -12,7 +13,8 @@ import logger from "redux-logger";
 export const ConfigureStore = () =>{
     const store = createStore(
        combineReducers({
-           dish: DishReducer
+           dish: dishReducer,
+           cart: cartReducer
        }),
        applyMiddleware(thunk, logger)
     );

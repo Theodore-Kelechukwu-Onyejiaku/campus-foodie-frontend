@@ -1,27 +1,31 @@
 import * as ActionTypes from "./ActionTypes";
 
-export const DishReducer = (state = {
-        isLoading: false,
+export const dishReducer = (state = {
+        getDishLoading: true,
+        addDishLoading:false,
         errorMess: null,
+        addDishError: null,
+        addDishsuccessMess:null,
         successMess: null,
         dishes: [],
     }, action) =>{
     switch(action.type) {
         case ActionTypes.DISH_LOADING:
-            return  {...state, isLoading: true}
+            return  {...state, getDishLoading: true}
 
         // FOR GETTING DISHES
         case ActionTypes.GET_DISHES:
-            return {...state, isLoading: false, errorMess: null, dishes:action.payload}
+            return {...state, getDishLoading: false, errorMess: null, dishes:action.payload}
         case ActionTypes.GET_DISHES_FAIL:
-            return {...state, isLoading: false, errorMess:action.payload, dishes:null}
+            return {...state, getDishLoading: false, errorMess:action.payload, dishes:null}
 
         // FOR ADDING DISHES
         case ActionTypes.ADD_DISH:
-            return  {...state, isLoading: false, errorMess: null, successMess: action.payload };
+            return  {...state, addDishLoading: false, errorMess: null, addDishsuccessMess: action.payload.message, dishes:[...state.dishes]};
         case ActionTypes.ADD_DISH_FAIL:
-            return {...state, isLoading: false, errorMess: action.payload, successMess: null}
-
+            return {...state, addDishLoading: false, addDishError: action.payload, addDishsuccessMess: null}
+        case ActionTypes.ADD_DISH_LOADING:
+            return {...state, addDishLoading:true}
 
         default: 
             return state;

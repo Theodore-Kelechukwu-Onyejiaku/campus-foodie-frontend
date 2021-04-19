@@ -1,31 +1,19 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 import FoodList from "../Food/FoodList"
+import Loader from "../Layout/Loader"
 
-export default function Home({ dish }) {
-    if (dish.isLoading) {
-        return (<div className="center-align"><div className="preloader-wrapper big active">
-            <div className="spinner-layer spinner-blue-only">
-                <div className="circle-clipper left">
-                    <div className="circle"></div>
+export default function Home({ dish, addItem }) {
+    return(
+        <div>
+            <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Welcome to Campus-foodie</h4>
+            {dish.getDishLoading && <Loader/>}
+            {(dish.dishes) ? 
+                <div>
+                    <FoodList addItem={addItem} dishes={dish.dishes}/>
                 </div>
-                <div className="gap-patch">
-                    <div className="circle"></div>
-                </div>
-                <div className="circle-clipper right">
-                    <div className="circle"></div>
-                </div>
-            </div>
+                :
+                <div className="red white-text center-align errorMessage">{dish.errorMess}</div>
+            }
         </div>
-        </div>)
-    }
-    if(dish.dishes !== null){
-        return (<div>
-                    <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Welcome to Campus-foodie</h4>
-                    < FoodList dishes={dish.dishes}/>
-                </div>)
-    }
-    else{
-        return (<div>{dish.errorMessage}</div>)
-    }
-    
+    )
 }

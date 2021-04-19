@@ -4,8 +4,8 @@ import {NavLink} from "react-router-dom";
 export default function Login() {
     return (
         <div className="row" style={{marginTop:"5%"}}>
-            <div className="col s0 m3 l4"></div>
-            <div className="col s12 m6 l4">
+            <div className="col s12 m2 l3"></div>
+            <div className="col s12 m8 l6">
                 <div className="row">
                     <form className="col s12">
                         <h5 className="center-align">Welcome To Campus Foodie!</h5>
@@ -13,11 +13,11 @@ export default function Login() {
                         <div className="row">
                             <div className="input-field col s12">
                                 <input id="icon_prefix" type="text" className="validate" />
-                                <label for="icon_prefix">Email</label>
+                                <label htmlFor="icon_prefix">Email</label>
                             </div>
                             <div className="input-field col s12">
                                 <input id="icon_telephone" type="password" className="validate" />
-                                <label for="icon_telephone">Password</label>
+                                <label htmlFor="icon_telephone">Password</label>
                                 <span toggle="#confirm-password" className="field-icon toggle-password">
                                     <span className="material-icons">visibility</span>
                                 </span>
@@ -43,7 +43,7 @@ export default function Login() {
                     </div>
                 </div>
             </div>
-            <div className="col s0 m6 l4"></div>
+            <div className="col s12 m2 l3"></div>
         </div>
     )
 }

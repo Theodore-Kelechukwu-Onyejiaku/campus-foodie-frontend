@@ -15,10 +15,10 @@ const AddProduct = ({ dish, postDish }) => {
     const [previewSource, setPreviewSource] = useState("");
     const [formData, setFormData] = useState({ dishName: "", price: "", description: "", dishPicture: "" });
     const [formError, setFormError] = useState("");
-    const [successReport, setSuccessReport] = useState(dish.successMess);
-    const [errorReport, setErrorReport] = useState(dish.errorMess);
-    const [loading, setLoading] = useState(dish.isLoading);
-
+    const [successReport, setSuccessReport] = useState(dish.addDishsuccessMess);
+    const [errorReport, setErrorReport] = useState(dish.addDishError);
+    const [loading, setLoading] = useState(dish.addDishLoading)
+ 
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
         // console.log(file.name)
@@ -44,14 +44,26 @@ const AddProduct = ({ dish, postDish }) => {
         }
     }
 
-    const handleSubmitFile = (e) => {
-        setLoading(loading)
+    const handleSubmitFile = async (e) => {
         e.preventDefault();
-        checkFormData(formData);
-        if (formError) { return };
-        if (!previewSource) return;
-        postDish(formData);
+        console.log(loading,dish.addDishLoading)
         setLoading(!loading)
+        if(checkFormData(formData)){
+            setFormError("Please fill in the form correctly!");
+        }else{
+            setFormError("");
+        }
+        if (formError !== ""){
+            setLoading(loading)
+            return
+        } 
+        if (!previewSource){
+            setLoading(loading)
+            return;
+        } 
+        await postDish(formData);
+        console.log(loading,dish.addDishLoading)
+
     }
 
     const checkFormData = (formData) => {
@@ -59,16 +71,17 @@ const AddProduct = ({ dish, postDish }) => {
             if (formData[data] === "") {
                 setFormError("Please fill all fields")
                 M.toast({ html: "Please fill in the form correctly!", classes:"red white-text" })
-                return;
+                return true;
             }
         }
+        
     }
 
     return (
         <div className="row top-margin">
             {successReport ? <div className="green white-text center-align successMessage">{successReport}</div>: <div></div>}
             {errorReport ? <div className="red white-text center-align errorMessage">{errorReport}</div>: <div></div>}
-            {loading ? <div className="center-align"><div className="preloader-wrapper big active">
+            {loading &&<div className="center-align"><div className="preloader-wrapper big active">
                     <div className="spinner-layer spinner-blue-only">
                         <div className="circle-clipper left">
                             <div className="circle"></div>
@@ -80,7 +93,7 @@ const AddProduct = ({ dish, postDish }) => {
                     </div>
                 </div>
                 </div>
-                :
+            }
             <>
             <div className="col s12 m3"></div>
             <div className="col s12 m6">
@@ -141,7 +154,6 @@ const AddProduct = ({ dish, postDish }) => {
             </div>
             <div className="col s12 m3"></div>
             </>
-            }
         </div>
     );
 }
