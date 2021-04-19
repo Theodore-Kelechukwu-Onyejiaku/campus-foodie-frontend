@@ -128,3 +128,9 @@ span.field-icon {
 .right button.quantity{
     background-color: #ee6e73;
 }
+
+.delete button.btn-red{
+    background-color: #ee6e73;
+}
+
+/* END OF CART LIST */

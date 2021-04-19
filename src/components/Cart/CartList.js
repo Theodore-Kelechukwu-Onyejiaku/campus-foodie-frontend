@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Cart({ cart, increaseItemInCart, decreaseItemInCart }) {
+export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, deleteItemFromCart }) {
     return (
         <div className="">
             {cart.length ?
@@ -20,15 +20,20 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart }) {
                                             <p className="black-text" style={{ clear: "both" }}>{cart.description}</p>
                                             <hr />
                                             <div className="left">
-                                                <button className="btn"><i className="material-icons" onClick={()=>{decreaseItemInCart(cart)}}>remove</i></button>
-                                                <button className="btn"><i className="material-icons" onClick={()=>{increaseItemInCart(cart)}}>add</i></button>
+                                                <button className="btn"><i className="material-icons" onClick={() => { decreaseItemInCart(cart) }}>remove</i></button>
+                                                <button className="btn"><i className="material-icons" onClick={() => { increaseItemInCart(cart) }}>add</i></button>
                                             </div>
                                             <div className="right">
                                                 <button className="btn btn-waves quantity"><i className="material-icons left">shopping_cart</i>{cart.quantity}</button>
                                             </div>
                                         </div>
                                     </div>
-                                    <hr/>
+                                    <hr />
+                                    {cart.categories.map((cart, index) =>
+                                        <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive", fontSize: "200%" }}>{cart}</div>
+                                    )}
+                                    <hr />
+                                    <div className="delete" style={{textAlign:"center"}}><button onClick={()=>{deleteItemFromCart(cart)}} className="btn btn-waves btn-red waves-effect waves-block waves-light"><i className="material-icons left">delete</i>Delete</button></div>
                                 </div>
                             </div>
                         )}

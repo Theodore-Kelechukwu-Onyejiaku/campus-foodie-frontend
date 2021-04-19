@@ -2,7 +2,6 @@ import * as ActionTypes from "./ActionTypes";
 let userCart = JSON.parse(localStorage.getItem("cart")) || [];
 let total = 0;
 let cartNumber = userCart.forEach(element => {
-    console.log(element["quantity"]);
     total = total + element["quantity"];
 });
 cartNumber = total;
@@ -23,6 +22,8 @@ export const cartReducer = (state = {
         case ActionTypes.DECREASE_CART_ITEM:
             return {...state, cart:action.payload}
             
+        case ActionTypes.DELETE_FROM_CART:
+            return {...state, cart:action.payload.newArr, number:action.payload.count}
         default:
             return state
     }

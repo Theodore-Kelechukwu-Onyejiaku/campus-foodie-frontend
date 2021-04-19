@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
+import {FadeTransform, Fade, Stagger} from "react-animation-components";
 
 export default function FoodList({ dishes, addItem }) {
     return (
         <div className="row">
-            {dishes.map(dish =>
+             <Stagger in>
+            {dishes.map((dish, index) =>
+                <Fade  key ={index} in>
                 <div className="col s12 m6 l4" key={dish._id} height="300px">
                     <div className="card">
                         <div className="card-image waves-effect waves-block waves-light">
@@ -15,8 +18,8 @@ export default function FoodList({ dishes, addItem }) {
                             <button className='btn pulse' onClick={()=>{addItem(dish)}}>Add to Cart</button>
                             <hr/>
                             <br/>
-                            {dish.categories.map((cat, index) =>
-                                <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive" }}>{cat}</div>
+                            {dish.categories.map((cart, index) =>
+                                <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive" }}>{cart}</div>
                             )}
                         </div>
                         <div className="card-reveal">
@@ -29,8 +32,9 @@ export default function FoodList({ dishes, addItem }) {
                         </div>
                     </div>
                 </div>
-                
+                </Fade>
             )}
+            </Stagger>
         </div>
     )
 }

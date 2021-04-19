@@ -1,8 +1,10 @@
-import React, { useEffect, useState }  from "react";
-import {Switch, Route, Redirect, withRouter} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import {postDish, getAllDishes} from "../redux/ActionCreators/dishActionCreator";
-import {addItem, increaseItemInCart, decreaseItemInCart, decreaseItem} from "../redux/ActionCreators/cartActionCreator"
+import { TransitionGroup, CSSTransition } from "react-transition-group";
+
+import { postDish, getAllDishes } from "../redux/ActionCreators/dishActionCreator";
+import { addItem, increaseItemInCart, decreaseItemInCart, deleteItemFromCart} from "../redux/ActionCreators/cartActionCreator"
 
 
 import CartList from "./Cart/CartList";
@@ -16,44 +18,52 @@ import About from "./Pages/About";
 import AddProduct from "./Admin/AddProduct";
 
 const mapStateToProps = (state) => {
-    return{
+    return {
         dish: state.dish,
         cart: state.cart
     }
 }
 
-const mapDispatchToProps = (dispatch)=> ({
+const mapDispatchToProps = (dispatch) => ({
     postDish: (formData) => dispatch(postDish(formData)),
     getAllDishes: () => dispatch(getAllDishes()),
     addItem: (item) => dispatch(addItem(item)),
     increaseItemInCart: (item) => dispatch(increaseItemInCart(item)),
     decreaseItemInCart: (item) => dispatch(decreaseItemInCart(item)),
+    deleteItemFromCart: (item) => dispatch(deleteItemFromCart(item))
 })
 
-const Main  = (props) =>{   
-    const [stateCart , setStateCart] = useState([])
-    useEffect(()=>{
-         props.getAllDishes();
-         setStateCart(props.cart.cart);
-    },[])
+const Main = (props) => {
+    const [stateCart, setStateCart] = useState([])
+    useEffect(() => {
+        props.getAllDishes();
+        setStateCart(props.cart.cart);
+    }, [])
     // setStateCart(props.cart);
     console.log(props.cart["number"])
     return (
         <div>
-            <Header  cartLength={props.cart.number}/>
-                <div className="container">
-                <Switch>
-                    <Route path="/" component={()=> <Home dish={props.dish} addItem={props.addItem} />} exact/>
-                    <Route path="/cart-list" component={()=><CartList cart={props.cart.cart} increaseItemInCart={props.increaseItemInCart} decreaseItemInCart={props.decreaseItemInCart}/>} exact/>
-                    <Route path="/signup" component={Signup} exact/>
-                    <Route path="/login" component={Login} exact/>
-                    <Route path="/earn" component={Earn} />
-                    <Route path="/about" component={About} />
-                    <Route path="/add-product" component={()=> <AddProduct dish={props.dish} postDish={props.postDish}/>} />
-                    <Redirect to="/"/>
-                </Switch>
-                </div>
-            <Footer/>
+            <Header cartLength={props.cart.number} />
+            <TransitionGroup>
+                <CSSTransition key={props.location.key} classNames="page" timeout={300}>
+                    <div className="container">
+                        <Switch>
+                            <Route path="/" component={() => <Home dish={props.dish} addItem={props.addItem} />} exact />
+                            <Route path="/cart-list" component={() => <CartList cart={props.cart.cart} increaseItemInCart={props.increaseItemInCart} 
+                                                                                decreaseItemInCart={props.decreaseItemInCart} 
+                                                                                deleteItemFromCart={props.deleteItemFromCart}
+                                                                                />} exact />
+                            <Route path="/signup" component={Signup} exact/>
+                            <Route path="/login" component={Login} exact/>
+                            <Route path="/earn" component={Earn} />
+                            <Route path="/about" component={About} />
+                            <Route path="/add-product" component={() => <AddProduct dish={props.dish} postDish={props.postDish} />} />
+                            <Redirect to="/" />
+                        </Switch>
+                    </div>
+                </CSSTransition>
+            </TransitionGroup>
+            <Footer />
         </div>
     )
 }

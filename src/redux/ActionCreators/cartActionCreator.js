@@ -7,7 +7,6 @@ import { element } from "prop-types";
 const totalCart = (cart)=>{
     let total = 0;
     cart.forEach(element => {
-        console.log(element["quantity"]);
         total = total + element["quantity"];
     });
     return total
@@ -38,9 +37,7 @@ export const addItem = (item) => (dispatch) =>{
        
         for (let element of newArr){
             if(element._id.toString() === item._id.toString()){
-                console.log(element._id, item._id)
                 element.quantity = element.quantity + 1;
-                console.log("Element existing!")
                 localStorage.setItem("cart", JSON.stringify(newArr));
                 let count = totalCart(newArr);
                 dispatch(increaseItem(newArr, count));
@@ -50,9 +47,8 @@ export const addItem = (item) => (dispatch) =>{
         
         item["quantity"] = 1;
         newArr.push(item)
-        console.log("item is not existing")
         localStorage.setItem("cart", JSON.stringify(newArr));
-        let count = totalCart(newArr, count);
+        let count = totalCart(newArr);
         dispatch(addToCart(item, count));
     }
     
@@ -71,13 +67,11 @@ export const increaseItemInCart=(item) => (dispatch) => {
     
     userCart.forEach(element => {
         if(element._id === item._id){
-            console.log(element, item)
             element.quantity = element.quantity + 1;
         }
     });
     let newArr = userCart;
     localStorage.setItem("cart", JSON.stringify(newArr));
-    console.log(newArr[0])
     let count = totalCart(newArr);
     dispatch(increaseItem(newArr,count));
 }
@@ -89,16 +83,13 @@ export const decreaseItem = (newArr)=>({
 
 export const decreaseItemInCart=(item) => (dispatch) => {
     let userCart = JSON.parse(localStorage.getItem("cart")) || null;
-    console.log("whatever")
     if(userCart === "null"){
         return
     }
     
     userCart.forEach(element => {
         if(element._id === item._id){
-            console.log(element, item)
             if(element.quantity === 1){
-                console.log("Oga your quantity is 0")
                 dispatch(decreaseItem(userCart))
                 return 
             }
@@ -107,7 +98,27 @@ export const decreaseItemInCart=(item) => (dispatch) => {
     });
     let newArr = userCart;
     localStorage.setItem("cart", JSON.stringify(newArr));
-    console.log(newArr[0])
     let count = totalCart(newArr);
     dispatch(increaseItem(newArr, count));
+}
+
+
+export const deletFromCart = (newArr, count) =>({
+    type: ActionTypes.DELETE_FROM_CART,
+    payload: {newArr:newArr, count:count}
+})
+export const deleteItemFromCart = (item) => (dispatch) =>{
+    let userCart = JSON.parse(localStorage.getItem("cart")) || null;
+    if(userCart == null){
+        return
+    }else{
+        userCart.forEach((element, index) =>{
+            if(element._id == item._id){
+                userCart.splice(userCart[index], 1)
+            }
+        })
+    }
+    localStorage.setItem("cart", JSON.stringify(userCart));
+    let count = totalCart(userCart);
+    dispatch(deletFromCart(userCart,count));
 }
