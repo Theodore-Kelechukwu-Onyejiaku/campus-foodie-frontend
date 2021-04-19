@@ -106,7 +106,7 @@ export const deleteItemFromCart = (item) => (dispatch) =>{
         return
     }else{
         userCart.forEach((element, index) =>{
-            if(element._id == item._id){
+            if(element._id === item._id){
                 userCart.splice(userCart[index], 1)
             }
         })
