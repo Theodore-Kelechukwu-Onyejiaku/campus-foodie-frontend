@@ -30,7 +30,7 @@ export default function FoodList({ dishes, addItem }) {
                                 <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive" }}>{cat}</div>
                             )}
                         </div>
-                    </div>
+                    </div> 
                 </div>
                 </Fade>
             )}
