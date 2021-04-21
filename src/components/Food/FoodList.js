@@ -13,7 +13,7 @@ export default function FoodList({ dishes, addItem }) {
                             <img className="activator" src={dish.dishUrl} alt="dish" />
                         </div>
                         <div className="card-body">
-                            <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive" }}>{dish.name}{" "}₦{dish.price}<i className="material-icons right">more_vert</i></span>
+                            <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive",color:"white" }}>{dish.name}{" "}₦{dish.price}<i className="material-icons right">more_vert</i></span>
                             <br/>
                             <button className='btn pulse' onClick={()=>{addItem(dish)}}>Add to Cart</button>
                             <hr/>

@@ -99,21 +99,32 @@ span.field-icon {
 
 
 /*START DISH CARD */
+.card{
+    height:400px;
+}
 .card-body{
     padding:5%;
+    z-index:1;
 }
 
 .card-body .chip{
     font-size: 150%;
 }
+.card-image img{
+    width:300px;
+    height:200px;
+}
 
+.card-body button.pulse{
+    z-index: 1;
+}
+
+/* LARGE SCREEN */
 @media only screen and (min-width: 600px){
-    .card{
-        height:400px;
-        width:100%;
-    }
+    
 
     .card-body{
+        color:white;
         position: absolute;
         width: 100%;
         bottom: 0%;
