@@ -5,7 +5,7 @@ export default function FoodList({ dishes, addItem }) {
     return (
         <div className="row">
              <Stagger in>
-            {dishes.map((dish, index) =>
+            {dishes && dishes.map((dish, index) =>
                 <Fade  key ={index} in>
                 <div className="col s12 m6 l4" key={dish._id} height="300px">
                     <div className="card">
@@ -34,6 +34,7 @@ export default function FoodList({ dishes, addItem }) {
                 </div>
                 </Fade>
             )}
+            {!dishes && <div>Nothing to display at the moment!</div>}
             </Stagger>
         </div>
     )
