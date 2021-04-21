@@ -34,7 +34,7 @@ export default function FoodList({ dishes, addItem }) {
                 </div>
                 </Fade>
             )}
-            {!dishes && <div>Nothing to display at the moment!</div>}
+            {!dishes && (<div>Nothing to display at the moment!</div>)}
             </Stagger>
         </div>
     )
