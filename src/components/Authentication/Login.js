@@ -20,6 +20,7 @@ export default function Login() {
             .catch(error => {
                 console.log(error)
             })
+        console.log(res)
     }
     return (
         <div className="row" style={{ marginTop: "5%" }}>

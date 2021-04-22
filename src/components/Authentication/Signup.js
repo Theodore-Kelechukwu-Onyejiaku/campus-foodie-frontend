@@ -48,6 +48,7 @@ export default function Signup({ signup, signupError, auth, signupLoading }) {
             .catch(error => {
                 signupError(error.message)
             })
+            console.log(res)
     }
     return (
         <div className="row" style={{ marginTop: "5%" }}>
