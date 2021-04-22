@@ -1,11 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { GoogleLogin } from "react-google-login"
+import {baseUrl} from "../../shared/baseUrl";
+
 
 export default function Login() {
     const responseGoogle = async (googleData) => {
-        console.log(googleData)
-        const res = await fetch("http://localhost:5000/api/auth/google", {
+        // console.log(googleData)
+        const res = await fetch(baseUrl+"api/auth/google", {
             method: "POST",
             body: JSON.stringify({
                 token: googleData.tokenId

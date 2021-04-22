@@ -5,7 +5,7 @@ import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 import { postDish, getAllDishes } from "../redux/ActionCreators/dishActionCreator";
 import { addItem, increaseItemInCart, decreaseItemInCart, deleteItemFromCart} from "../redux/ActionCreators/cartActionCreator"
-import {signupError,signup,signupLoading} from "../redux/ActionCreators/authActionCreator";
+import {signupError,signup,signupLoading, checkIsLoggedIn} from "../redux/ActionCreators/authActionCreator";
 
 import CartList from "./Cart/CartList";
 import Home from "./Home/Home";
@@ -27,6 +27,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+    checkIsLoggedIn : () => dispatch(checkIsLoggedIn()),
     signup : (userData, token, successMess) => dispatch(signup(userData, token, successMess)),
     signupError : (error) =>  dispatch(signupError(error)),
     signupLoading: () => dispatch(signupLoading()),
@@ -41,6 +42,7 @@ const mapDispatchToProps = (dispatch) => ({
 const Main = (props) => {
     useEffect(() => {
         props.getAllDishes();
+        props.checkIsLoggedIn();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (

@@ -1,16 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
-import Loader from "../Layout/Loader"; 
+import Loader from "../Layout/Loader";
 import { useHistory } from "react-router-dom";
+import {baseUrl} from "../../shared/baseUrl";
 
 
-export default function Signup({signup, signupError, auth, signupLoading}) {
+
+export default function Signup({ signup, signupError, auth, signupLoading }) {
+    const [visible, setVisible] = useState(false)
     const history = useHistory();
+
+    const handleVisibility = () => {
+        setVisible(!visible);
+    }
+
+
     const responseGoogle = async (googleData) => {
         signupLoading()
         console.log(googleData)
-        const res = await fetch("http://localhost:5000/api/auth/google", {
+        const res = await fetch(baseUrl+"api/auth/google", {
             method: "POST",
             body: JSON.stringify({
                 token: googleData.tokenId
@@ -19,35 +28,35 @@ export default function Signup({signup, signupError, auth, signupLoading}) {
                 "Content-Type": "application/json"
             }
         })
-        .then(resp => resp.json() )
-        .then(async data => {
-            console.log(data);
-            if(data.token){
-                // Successful
-                localStorage.setItem("token", data.token);
-                console.log(data.user)
-                await signup(data.user, data.token, data.message)
-                history.push("/profile")
-            }
-            else{
-                //Not successful
-                signupError(data.message)
-            }
-            
+            .then(resp => resp.json())
+            .then(async data => {
+                console.log(data);
+                if (data.token) {
+                    // Successful
+                    localStorage.setItem("token", data.token);
+                    console.log(data.user)
+                    await signup(data.user, data.token, data.message)
+                    history.push("/profile")
+                }
+                else {
+                    //Not successful
+                    signupError(data.message)
+                }
 
-        })
-        .catch(error => {
-            signupError(error.message)
-        })
+
+            })
+            .catch(error => {
+                signupError(error.message)
+            })
     }
     return (
         <div className="row" style={{ marginTop: "5%" }}>
             <div className="col s12 m2 l3"></div>
             <div className="col s12 m8 l6">
                 <div className="row">
-                    {(auth.isLoading) ? <Loader/>: <div></div>}
-                    {auth.successMess ? <div className="green white-text center-align successMessage">{auth.successMess}</div>: <div></div>}
-                    {auth.errorMess ? <div className="red white-text center-align errorMessage">{auth.errorMess}</div>: <div></div>}
+                    {(auth.isLoading) ? <Loader /> : <div></div>}
+                    {auth.successMess ? <div className="green white-text center-align successMessage">{auth.successMess}</div> : <div></div>}
+                    {auth.errorMess ? <div className="red white-text center-align errorMessage">{auth.errorMess}</div> : <div></div>}
                     <form className="col s12">
                         <h5 className="center-align">Welcome To Campus Foodie!</h5>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Create an Account!</h4>
@@ -56,13 +65,21 @@ export default function Signup({signup, signupError, auth, signupLoading}) {
                                 <input id="icon_prefix" type="text" className="validate" />
                                 <label for="icon_prefix">Email</label>
                             </div>
-                            <div className="input-field col s12">
-                                <input id="icon_telephone" type="password" className="validate" />
+                            {visible ? <div className="input-field col s12">
+                                <input id="icon_telephone" type="text" className="validate" />
                                 <label for="icon_telephone">Password</label>
-                                <span toggle="#confirm-password" className="field-icon toggle-password">
+                                <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                     <span className="material-icons">visibility</span>
                                 </span>
-                            </div>
+                            </div> :
+                                <div className="input-field col s12">
+                                    <input id="icon_telephone" type="password" className="validate" />
+                                    <label for="icon_telephone">Password</label>
+                                    <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
+                                        <span className="material-icons">visibility_off</span>
+                                    </span>
+                                </div>
+                            }
                             <button className="btn pulse">Login</button>
                         </div>
                     </form>
@@ -82,7 +99,7 @@ export default function Signup({signup, signupError, auth, signupLoading}) {
                         onFailure={responseGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                    
+
                     <div className="social-link facebook center-align">
                         <NavLink to="/#"><i className="fa fa-facebook fa-2x"></i><span>Signup with Facebook</span></NavLink>
                     </div>

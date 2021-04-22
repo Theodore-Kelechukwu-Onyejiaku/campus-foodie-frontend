@@ -6,7 +6,10 @@ export const authReducer = (state = {
     token: browserToken,
     user: {},
     errorMess: "",
-    successMess: ""
+    successMess: "",
+    isAthenticated: false,
+    isNotLoggedInMessage: "",
+    isLoggedInMessage: "",
 }, action ) =>{
     switch(action.type){
         case ActionTypes.SIGNUP:
@@ -17,6 +20,13 @@ export const authReducer = (state = {
              
         case ActionTypes.SIGNUP_ERROR:
             return{...state,errorMess: action.payload, isLoading:false, successMess:""}
+
+        case ActionTypes.IS_LOGGED_IN_SUCCESS:
+            return{...state, isLoggedInMessage: "You are logged in already!", isNotLoggedInMessage:"", user: action.payload}
+        
+        case ActionTypes.IS_LOGGED_IN_ERROR:
+            return{...state, isLoggedInMessage: "", isNotLoggedInMessage: "Sorry, you are not logged in", user : {} }
+
         default:
             return state
     }   
