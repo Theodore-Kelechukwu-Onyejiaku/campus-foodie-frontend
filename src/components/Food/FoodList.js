@@ -6,7 +6,7 @@ export default function FoodList({ dishes, addItem }) {
         <div className="row">
              <Stagger in>
             {dishes && dishes.map((dish, index) =>
-                <Fade  key ={index} in>
+                <Fade  key ={index} in="true">
                 <div className="col s12 m6 l4" key={dish._id} height="300px">
                     <div className="card">
                         <div className="card-image waves-effect waves-block waves-light">

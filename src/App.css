@@ -2,6 +2,10 @@ body{
     position:relative;
 }
 
+button{
+    cursor: pointer;
+}
+
 .page-footer{ 
    position:relative;
    bottom:0;
@@ -58,18 +62,11 @@ span.field-icon {
 }
 
 .social-link{
-    padding:5%;
-    margin-bottom: 2%;
     color:white;
-    font-size:150%;
-}
-
-.social-link.center-align i,span{
-    color:white;
-}
-
-.social-link i{
-    float:left;
+    width:100%;
+    border:none;
+    padding:2%;
+    margin-bottom: 5px;
 }
 
 .social-link.facebook{

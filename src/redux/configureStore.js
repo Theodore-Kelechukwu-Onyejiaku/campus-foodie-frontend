@@ -6,6 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 // import { Leaders} from "./leaders";
 import {dishReducer} from "./dishReducer";
 import {cartReducer} from "./cartReducer";
+import {authReducer} from "./authReducer"
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 
@@ -14,7 +15,8 @@ export const ConfigureStore = () =>{
     const store = createStore(
        combineReducers({
            dish: dishReducer,
-           cart: cartReducer
+           cart: cartReducer,
+           auth: authReducer
        }),
        applyMiddleware(thunk, logger)
     );
