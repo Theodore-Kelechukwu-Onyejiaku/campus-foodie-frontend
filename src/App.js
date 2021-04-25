@@ -12,7 +12,9 @@ const store = ConfigureStore();
 export default function App(){
   useEffect(()=>{
     window.addEventListener('load', function() {
-      var elems = document.querySelectorAll('.sidenav');
+      var carou = document.querySelectorAll('.carousel');
+      var elems = document.querySelectorAll('.sidenav');  
+      M.Carousel.init(carou, {});
       M.Sidenav.init(elems, {});
     });
       

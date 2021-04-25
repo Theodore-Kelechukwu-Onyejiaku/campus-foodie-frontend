@@ -1,10 +1,15 @@
-import React from "react";
+import React,{useState} from "react";
 import { NavLink } from "react-router-dom";
 import { GoogleLogin } from "react-google-login"
 import {baseUrl} from "../../shared/baseUrl";
 
 
 export default function Login() {
+    const [visible, setVisible] = useState(false)
+
+    const handleVisibility = () => {
+        setVisible(!visible);
+    }
     const responseGoogle = async (googleData) => {
         // console.log(googleData)
         const res = await fetch(baseUrl+"api/auth/google", {
@@ -36,13 +41,21 @@ export default function Login() {
                                 <input id="icon_prefix" type="text" className="validate" />
                                 <label htmlFor="icon_prefix">Email</label>
                             </div>
-                            <div className="input-field col s12">
-                                <input id="icon_telephone" type="password" className="validate" />
-                                <label htmlFor="icon_telephone">Password</label>
-                                <span toggle="#confirm-password" className="field-icon toggle-password">
+                            {visible ? <div className="input-field col s12">
+                                <input id="icon_telephone" type="text" className="validate" />
+                                <label for="icon_telephone">Password</label>
+                                <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                     <span className="material-icons">visibility</span>
                                 </span>
-                            </div>
+                            </div> :
+                                <div className="input-field col s12">
+                                    <input id="icon_telephone" type="password" className="validate" />
+                                    <label for="icon_telephone">Password</label>
+                                    <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
+                                        <span className="material-icons">visibility_off</span>
+                                    </span>
+                                </div>
+                            }
                             <button className="btn pulse">Login</button>
                         </div>
                     </form>
@@ -59,7 +72,7 @@ export default function Login() {
                         )}
                         buttonText="Login"
                         onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
+                        onFailure={{}}
                         cookiePolicy={'single_host_origin'}
                     />
                     <div className="social-link facebook center-align">

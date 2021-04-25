@@ -4,20 +4,54 @@ import { GoogleLogin } from "react-google-login";
 import Loader from "../Layout/Loader";
 import { useHistory } from "react-router-dom";
 import {baseUrl} from "../../shared/baseUrl";
+import M from 'materialize-css/dist/js/materialize.min.js'
 
 
 
-export default function Signup({ signup, signupError, auth, signupLoading }) {
-    const [visible, setVisible] = useState(false)
+
+
+export default function Signup({ signupGoogle, signupGoogleError, auth, signupGoogleLoading, signupLocalPost }) {
+    const [visible, setVisible] = useState(false);
+    const [passwordValue, setPasswordValue] = useState("");
+    const [emailValue, setEmailValue] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const [disable, setDisable] = useState(false);
+    const [passwordLength, setPasswordLength] = useState(0);
     const history = useHistory();
+
+
+    const handlePasswordInput = (e) =>{
+        setPasswordValue(e.target.value);
+        setPasswordLength(e.target.value.length);
+        if(passwordLength < 6){
+            if(passwordLength === 1){
+                M.toast({ html: "Password should be greater than 6", classes:"red white-text" })
+            }
+            setPasswordError("Password should be greater than 6");
+            setDisable(true);
+        }else{
+            setPasswordError("");
+            setDisable(false);
+        }
+    }
+
+    const handleEmailInput = (e) =>{
+        setEmailValue(e.target.value)
+    }
 
     const handleVisibility = () => {
         setVisible(!visible);
     }
 
+    const handleSubmit = (e)=>{
+        e.preventDefault();
+        let signupBody = {email:emailValue, password: passwordValue};
+        console.log(signupBody)
+        signupLocalPost(signupBody)
+    }
 
     const responseGoogle = async (googleData) => {
-        signupLoading()
+        signupGoogleLoading()
         console.log(googleData)
         const res = await fetch(baseUrl+"api/auth/google", {
             method: "POST",
@@ -34,54 +68,60 @@ export default function Signup({ signup, signupError, auth, signupLoading }) {
                 if (data.token) {
                     // Successful
                     localStorage.setItem("token", data.token);
-                    console.log(data.user)
-                    await signup(data.user, data.token, data.message)
-                    history.push("/profile")
+                    await signupGoogle(data.user, data.token, data.message)
+                    setTimeout(()=>{
+                        history.push("/profile")
+                    }, 1500)
                 }
                 else {
+                    console.log("baba just display error jorr")
                     //Not successful
-                    signupError(data.message)
+                    signupGoogleError(data.message)
                 }
-
-
             })
             .catch(error => {
-                signupError(error.message)
+                signupGoogleError(error.message)
             })
-            console.log(res)
+        console.log(res)
+    }
+
+    const responseErrorGoogle = (error) =>{
+        console.log(error);
     }
     return (
         <div className="row" style={{ marginTop: "5%" }}>
             <div className="col s12 m2 l3"></div>
             <div className="col s12 m8 l6">
                 <div className="row">
-                    {(auth.isLoading) ? <Loader /> : <div></div>}
+                    {auth.isLoading ? <Loader /> : <div></div>}
                     {auth.successMess ? <div className="green white-text center-align successMessage">{auth.successMess}</div> : <div></div>}
                     {auth.errorMess ? <div className="red white-text center-align errorMessage">{auth.errorMess}</div> : <div></div>}
-                    <form className="col s12">
+                    <form className="col s12" onSubmit={(e)=>{handleSubmit(e)}}>
                         <h5 className="center-align">Welcome To Campus Foodie!</h5>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Create an Account!</h4>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="icon_prefix" type="text" className="validate" />
-                                <label for="icon_prefix">Email</label>
+                                <input id="icon_prefix" type="email" onChange={(e)=>{handleEmailInput(e)}} className="validate" value={emailValue} required/>
+                                <label htmlFor="icon_prefix">Email</label>
                             </div>
                             {visible ? <div className="input-field col s12">
-                                <input id="icon_telephone" type="text" className="validate" />
+                                <input id="icon_telephone" type="text" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}} required/>
                                 <label for="icon_telephone">Password</label>
                                 <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                     <span className="material-icons">visibility</span>
                                 </span>
+                                <br/><span className="red-text">{passwordError}</span>
                             </div> :
                                 <div className="input-field col s12">
-                                    <input id="icon_telephone" type="password" className="validate" />
+                                    <input id="icon_telephone" type="password" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}} required/>
                                     <label for="icon_telephone">Password</label>
                                     <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                         <span className="material-icons">visibility_off</span>
                                     </span>
+                                <br/><span className="red-text">{passwordError}</span>
                                 </div>
                             }
-                            <button className="btn pulse">Login</button>
+                            <button className="btn pulse" disabled={disable} >Login</button>
                         </div>
                     </form>
                     <div className="right-align">
@@ -97,7 +137,7 @@ export default function Signup({ signup, signupError, auth, signupLoading }) {
                         )}
                         buttonText="Login"
                         onSuccess={responseGoogle}
-                        onFailure={responseGoogle}
+                        onFailure={responseErrorGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
 

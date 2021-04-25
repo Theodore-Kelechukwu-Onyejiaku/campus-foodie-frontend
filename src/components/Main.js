@@ -3,9 +3,10 @@ import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 
+
 import { postDish, getAllDishes } from "../redux/ActionCreators/dishActionCreator";
 import { addItem, increaseItemInCart, decreaseItemInCart, deleteItemFromCart} from "../redux/ActionCreators/cartActionCreator"
-import {signupError,signup,signupLoading, checkIsLoggedIn} from "../redux/ActionCreators/authActionCreator";
+import {signupGoogleError,signupGoogle,signupGoogleLoading,signupLocalPost, checkIsLoggedIn} from "../redux/ActionCreators/authActionCreator";
 
 import CartList from "./Cart/CartList";
 import Home from "./Home/Home";
@@ -17,7 +18,7 @@ import Earn from "./Earn/Earn";
 import About from "./Pages/About";
 import AddProduct from "./Admin/AddProduct";
 import Profile from "./User/Profile"
-
+import AccountActivation from "./User/AccountActivation"
 const mapStateToProps = (state) => {
     return {
         dish: state.dish,
@@ -28,9 +29,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
     checkIsLoggedIn : () => dispatch(checkIsLoggedIn()),
-    signup : (userData, token, successMess) => dispatch(signup(userData, token, successMess)),
-    signupError : (error) =>  dispatch(signupError(error)),
-    signupLoading: () => dispatch(signupLoading()),
+    signupGoogle : (userData, token, successMess) => dispatch(signupGoogle(userData, token, successMess)),
+    signupLocalPost : (formData) => dispatch(signupLocalPost(formData)),
+    signupGoogleError : (error) =>  dispatch(signupGoogleError(error)),
+    signupGoogleLoading: () => dispatch(signupGoogleLoading()),
     postDish: (formData) => dispatch(postDish(formData)),
     getAllDishes: () => dispatch(getAllDishes()),
     addItem: (item) => dispatch(addItem(item)),
@@ -47,7 +49,7 @@ const Main = (props) => {
     }, [])
     return (
         <div>
-            <Header cartLength={props.cart.number} />
+            <Header cartLength={props.cart.number} auth={props.auth}/>
             <TransitionGroup>
                 <CSSTransition key={props.location.key} classNames="page" timeout={300}>
                     <div className="container">
@@ -57,12 +59,13 @@ const Main = (props) => {
                                                                                 decreaseItemInCart={props.decreaseItemInCart} 
                                                                                 deleteItemFromCart={props.deleteItemFromCart}
                                                                                 />} exact />
-                            <Route path="/signup" component={()=><Signup signupLoading={props.signupLoading} signup={props.signup} auth={props.auth} signupError={props.signupError}/>} exact/>
+                            <Route path="/signup" component={()=><Signup signupGoogleLoading={props.signupGoogleLoading} signupGoogle={props.signupGoogle} auth={props.auth} signupGoogleError={props.signupGoogleError} signupLocalPost={props.signupLocalPost}/>} exact/>
                             <Route path="/login" component={Login} exact/>
                             <Route path="/earn" component={Earn} />
                             <Route path="/about" component={About} />
                             <Route path="/add-product" component={() => <AddProduct dish={props.dish} postDish={props.postDish} />} />
                             <Route path="/profile" component={()=> <Profile auth={props.auth}/>} />
+                            <Route path="/account-activation" component={() => <AccountActivation auth={props.auth} />} />
                             <Redirect to="/" />
                         </Switch>
                     </div>

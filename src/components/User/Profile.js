@@ -1,13 +1,19 @@
 import React from 'react';
+import PleaseLogin from "../Layout/PleaseLogin";
 
 const Profile = ({auth})=>{
-    return(
-        <div>
-            Username: {auth.user.username}
-            <br/>
-            Email: {auth.user.email}
-        </div>            
-    )
+    if(auth.user.email){
+        return(
+            <div>
+                Email: {auth.user.email}
+            </div>
+        )
+    }
+    else{
+        return(
+            <PleaseLogin/>
+        )
+    }
 }
 
 export default Profile;
