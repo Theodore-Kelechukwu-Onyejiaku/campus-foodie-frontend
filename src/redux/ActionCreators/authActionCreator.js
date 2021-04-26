@@ -72,7 +72,9 @@ export const signupLocalPost = (formData) => dispatch =>{
         body: JSON.stringify(formData),
         headers: {"Content-type": "application/json"}
     })
-    .then(response => response.json())
+    .then(response =>{
+            return response.json()
+    })
     .then(async result =>{
         if(result.token){
             localStorage.setItem("token",result.token);
@@ -83,5 +85,8 @@ export const signupLocalPost = (formData) => dispatch =>{
         }else{
             dispatch(signupLocalError(result.message));
         }
+    })
+    .catch(error =>{
+        dispatch(signupLocalError(error.message));
     })
 }

@@ -88,6 +88,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
     const responseErrorGoogle = (error) =>{
         console.log(error);
     }
+
     return (
         <div className="row" style={{ marginTop: "5%" }}>
             <div className="col s12 m2 l3"></div>
@@ -95,7 +96,16 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                 <div className="row">
                     {auth.isLoading ? <Loader /> : <div></div>}
                     {auth.successMess ? <div className="green white-text center-align successMessage">{auth.successMess}</div> : <div></div>}
-                    {auth.errorMess ? <div className="red white-text center-align errorMessage">{auth.errorMess}</div> : <div></div>}
+                    {auth.errorMess ? 
+                        <div class="row">
+                            <div className="col s12 m12 l12 waves-effect waves-block waves-light center-align">
+                                <i className="material-icons">info</i><br/>
+                                <span>{auth.errorMess}hello</span>
+                            </div>
+                                
+                        </div>
+                    
+                        : <div></div>}
                     <form className="col s12" onSubmit={(e)=>{handleSubmit(e)}}>
                         <h5 className="center-align">Welcome To Campus Foodie!</h5>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Create an Account!</h4>
@@ -108,7 +118,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                                 <input id="icon_telephone" type="text" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}} required/>
                                 <label for="icon_telephone">Password</label>
                                 <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
-                                    <span className="material-icons">visibility</span>
+                                    <span className="material-icons" id="see">visibility</span>
                                 </span>
                                 <br/><span className="red-text">{passwordError}</span>
                             </div> :
@@ -116,12 +126,12 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                                     <input id="icon_telephone" type="password" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}} required/>
                                     <label for="icon_telephone">Password</label>
                                     <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
-                                        <span className="material-icons">visibility_off</span>
+                                        <span className="material-icons" id="see">visibility_off</span>
                                     </span>
                                 <br/><span className="red-text">{passwordError}</span>
                                 </div>
                             }
-                            <button className="btn pulse" disabled={disable} >Login</button>
+                            <button type="submit" className="btn pulse" disabled={disable} >Login</button>
                         </div>
                     </form>
                     <div className="right-align">

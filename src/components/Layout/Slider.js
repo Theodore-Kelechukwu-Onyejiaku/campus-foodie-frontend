@@ -11,6 +11,7 @@ const Slider = () =>{
     return(
         <div>
             <div class="carousel">
+
                 <div class="carousel-item" ><img  alt="slider" src={pic1} width="200px" height="200px"/></div>
                 <div class="carousel-item" ><img  alt="slider" src={pic2} width="200px" height="200px"/></div>
                 <div class="carousel-item" ><img  alt="slider" src={pic3} width="200px" height="200px"/></div>

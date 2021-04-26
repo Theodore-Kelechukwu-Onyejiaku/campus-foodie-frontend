@@ -46,10 +46,10 @@ button{
     padding:1%;
 }
 
-.errorMessage{
-    width:50%;
-    margin:auto;
-    padding:1%;
+div.errorMessage{
+    color:white;
+    background-color: #ee6e73;
+    padding:1% 0%;
 }
 
 span.field-icon {
@@ -145,4 +145,8 @@ span.field-icon {
 
 .btn .my-red-btn {
     background-color:#ee6e73 ;
+}
+
+#see{
+    transition:all 5s;
 }

@@ -15,7 +15,7 @@ export default function FoodList({ dishes, addItem }) {
                         <div className="card-body">
                             <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive",color:"white" }}>{dish.name}{" "}₦{dish.price}<i className="material-icons right">more_vert</i></span>
                             <br/>
-                            <button className='btn pulse' onClick={()=>{addItem(dish)}}>Add to Cart</button>
+                            <button className='btn pulse' onClick={()=>{addItem(dish)}}><i className="material-icons left">add_shopping_cart</i>Add</button>
                             <hr/>
                             <br/>
                             {dish.categories.map((cart, index) =>

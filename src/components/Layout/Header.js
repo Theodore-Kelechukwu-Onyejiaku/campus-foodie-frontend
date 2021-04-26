@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom"
+import Slider from "../Layout/Slider"
+
 
 export default function Header({ cartLength, auth }) {
   return (
@@ -8,9 +10,12 @@ export default function Header({ cartLength, auth }) {
       <div className="navbar-fixed">
         <nav>
           <div className="nav-wrapper">
+            <NavLink to="/" className="brand-logo" style={{ fontFamily: "'Tangerine', cursive" }}>Campus Foodie</NavLink>
+
             <Link to="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
 
             <ul id="nav-mobile" className="right hide-on-med-and-down">
+
               <li><NavLink activeClassName="active-link" to="/login"><i className="material-icons white-text left"><i className="fa fa-sign-in"></i></i>Login</NavLink></li>
               <li><NavLink activeClassName="active-link" to="/earn"><i className="material-icons left">attach_money</i>Earn</NavLink></li>
               <li>
@@ -60,7 +65,7 @@ export default function Header({ cartLength, auth }) {
         <li><Link to="/notifications"><i class="material-icons left">add_alert</i>Alerts</Link></li>
       </ul>
     </div>
-    <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Welcome to Campus-foodie</h4>
+    {/* {window.location.href === "http://localhost:3000/"? <Slider/>:<div>jjhjhjhjh</div>} */}
   </>
   )
 }
