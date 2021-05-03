@@ -12,8 +12,12 @@ export const authReducer = (state = {
     isLoggedInMessage: "",
 }, action ) =>{
     switch(action.type){
+        
+        case ActionTypes.LOG_OUT:
+            return{...state, isNotLoggedInMessage:"You are logged out!", token:"", user: {}, isLoggedInMessage:"You are successfully Logged out", successMess:"You are successfully Logged out", errorMess: ""}
+        
         case ActionTypes.IS_LOGGED_IN_SUCCESS:
-            return{...state, isLoggedInMessage: "You are logged in already!", isNotLoggedInMessage:"", user: action.payload}
+            return{...state, isLoggedInMessage: "You are logged in already!", isNotLoggedInMessage:"", user: action.payload, isAuthenticated:true}
         
         case ActionTypes.IS_LOGGED_IN_ERROR:
             return{...state, isLoggedInMessage: "", isNotLoggedInMessage: "Sorry, you are not logged in", user : {} }
@@ -26,7 +30,7 @@ export const authReducer = (state = {
             return{...state, isLoading:true, successMess:"", errorMess:""}
              
         case ActionTypes.SIGNUP_GOOGLE_ERROR:
-            return{...state,errorMess: action.payload, isLoading:false, successMess:""}
+            return{...state,errorMess: action.payload, isLoading:false, successMess:"", }
         // END OF GOOGLE SIGNUP
 
 
@@ -40,6 +44,7 @@ export const authReducer = (state = {
         case ActionTypes.SIGNUP_LOCAL_ERROR:
             return{...state,errorMess: action.payload, isLoading:false, successMess:""}
             
+        
         default:
             return state
     }   

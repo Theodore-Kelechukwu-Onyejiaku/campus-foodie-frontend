@@ -1,9 +1,8 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom"
-import Slider from "../Layout/Slider"
 
 
-export default function Header({ cartLength, auth }) {
+export default function Header({ cartLength, auth, logoutUser}) {
   return (
   <>
     <div>
@@ -15,30 +14,31 @@ export default function Header({ cartLength, auth }) {
             <Link to="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
 
             <ul id="nav-mobile" className="right hide-on-med-and-down">
-
+            {auth.user.email ? 
+              <li><NavLink  to="/login" onClick={()=>{logoutUser()}}><i className="material-icons white-text left"><i className="fa fa-sign-out"></i></i>Logout</NavLink></li>
+              :
               <li><NavLink activeClassName="active-link" to="/login"><i className="material-icons white-text left"><i className="fa fa-sign-in"></i></i>Login</NavLink></li>
+            }  
               <li><NavLink activeClassName="active-link" to="/earn"><i className="material-icons left">attach_money</i>Earn</NavLink></li>
               <li>
                 <NavLink activeClassName="active-link" to="/cart-list"><i className="material-icons left">shopping_cart</i>{cartLength}</NavLink>
               </li>
-              {auth.user.email
-                &&
-                (<li><Link to="#" class="dropdown-trigger" data-target="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></Link></li>)
-              }
               <li><NavLink activeClassName="active-link" to="/about"><i className="material-icons white-text left">info</i>About?</NavLink></li>
+               <li><Link to="#" class="dropdown-trigger" data-target="dropdown2"><i class="material-icons left">account_circle</i>User<i class="material-icons right">arrow_drop_down</i></Link></li>
             </ul>
-            {auth.user.email
-              &&
-              (
-                <ul id="dropdown1" class="dropdown-content">
+            {auth.user.email ?  <ul id="dropdown2" class="dropdown-content">
                   <li><Link to="/profile" ><i class="material-icons left">account_circle</i>Profile</Link></li>
                   <li><Link to="/orders"><i className="material-icons left">check_box</i>Orders</Link></li>
-                  <li class="divider"></li>
                   <li><Link to="/notifications"><i class="material-icons left">add_alert</i>Alerts</Link></li>
+                  <li><Link to="/login" onClick={()=>{logoutUser()}}><i className="fa fa-sign-out"></i>Logout</Link></li>
+                  <li class="divider"></li>
                 </ul>
-              )
-            }
-
+            :
+            <ul id="dropdown2" class="dropdown-content">
+                    <li><NavLink to="/login" className="side-link"><i className="fa fa-sign-in"></i>Login</NavLink></li>
+          </ul>
+          }
+               
             <ul id="nav-mobile" className="right hide-on-large-only">
               <li>
                 <NavLink activeClassName="active-link" to="/cart-list"><i className="material-icons left">shopping_cart</i>{cartLength}</NavLink>

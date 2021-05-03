@@ -12,7 +12,8 @@ const store = ConfigureStore();
 export default function App(){
   useEffect(()=>{
     window.addEventListener('load', function() {
-      var elems = document.querySelectorAll('.sidenav');  
+      var elems = document.querySelectorAll('.sidenav'); 
+       
       M.Sidenav.init(elems, {});
     });
       

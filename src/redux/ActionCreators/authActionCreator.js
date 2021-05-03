@@ -4,6 +4,16 @@ import { baseUrl } from "../../shared/baseUrl";
 import history from "../history";
 
 
+export const logout = () =>({
+    type: ActionTypes.LOG_OUT
+})
+
+export const logoutUser = () => dispatch =>{
+    localStorage.setItem("token", "");
+    history.push("/login");
+     dispatch(logout())
+}
+
 export const signupGoogle = (userData, token, successMess) =>({
     type: ActionTypes.SIGNUP_GOOGLE,
     payload: {userData, token, successMess}
@@ -82,6 +92,34 @@ export const signupLocalPost = (formData) => dispatch =>{
             setTimeout(()=>{
                 history.push("/account-activation")
             }, 1500)
+        }else{
+            dispatch(signupLocalError(result.message));
+        }
+    })
+    .catch(error =>{
+        dispatch(signupLocalError(error.message));
+    })
+}
+
+
+export const loginLocalPost = (formData) => dispatch =>{
+    dispatch(signupLocalLoading())
+    fetch(baseUrl+"api/auth/local-login", {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: {"Content-type": "application/json"}
+    })
+    .then(response =>{
+            return response.json()
+    })
+    .then(async result =>{
+        if(result.isActivated){
+            console.log("error on line 117")
+            localStorage.setItem("token",result.token);
+            await dispatch(signupLocal(result.user, result.token, result.message))
+            setTimeout(()=>{
+                history.push("/profile")
+            }, 1500)   
         }else{
             dispatch(signupLocalError(result.message));
         }

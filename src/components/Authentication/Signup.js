@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import Loader from "../Layout/Loader";
-import { useHistory } from "react-router-dom";
 import {baseUrl} from "../../shared/baseUrl";
 import M from 'materialize-css/dist/js/materialize.min.js'
 
@@ -97,10 +96,10 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     {auth.isLoading ? <Loader /> : <div></div>}
                     {auth.successMess ? <div className="green white-text center-align successMessage">{auth.successMess}</div> : <div></div>}
                     {auth.errorMess ? 
-                        <div class="row">
-                            <div className="col s12 m12 l12 waves-effect waves-block waves-light center-align">
+                        <div class="row" style={{backgroundColor:"#ee6e73", color:"white"}}>
+                            <div className="col s12 m12 l12 pulse center-align">
                                 <i className="material-icons">info</i><br/>
-                                <span>{auth.errorMess}hello</span>
+                                <span>{auth.errorMess}</span>
                             </div>
                                 
                         </div>
@@ -131,7 +130,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                                 <br/><span className="red-text">{passwordError}</span>
                                 </div>
                             }
-                            <button type="submit" className="btn pulse" disabled={disable} >Login</button>
+                            <button type="submit" className="btn pulse" disabled={disable} >Create Account</button>
                         </div>
                     </form>
                     <div className="right-align">

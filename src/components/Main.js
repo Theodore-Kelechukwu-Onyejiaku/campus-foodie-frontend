@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { TransitionGroup } from "react-transition-group";
 
 
 import { postDish, getAllDishes } from "../redux/ActionCreators/dishActionCreator";
 import { addItem, increaseItemInCart, decreaseItemInCart, deleteItemFromCart} from "../redux/ActionCreators/cartActionCreator"
-import {signupGoogleError,signupGoogle,signupGoogleLoading,signupLocalPost, checkIsLoggedIn} from "../redux/ActionCreators/authActionCreator";
+import {signupGoogleError,signupGoogle,signupGoogleLoading,signupLocalPost, checkIsLoggedIn, logoutUser, loginLocalPost} from "../redux/ActionCreators/authActionCreator";
 
 import CartList from "./Cart/CartList";
 import Home from "./Home/Home";
@@ -28,7 +28,9 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+    loginLocalPost: (formData) => dispatch(loginLocalPost(formData)),
     checkIsLoggedIn : () => dispatch(checkIsLoggedIn()),
+    logoutUser: () => dispatch(logoutUser()),
     signupGoogle : (userData, token, successMess) => dispatch(signupGoogle(userData, token, successMess)),
     signupLocalPost : (formData) => dispatch(signupLocalPost(formData)),
     signupGoogleError : (error) =>  dispatch(signupGoogleError(error)),
@@ -49,9 +51,9 @@ const Main = (props) => {
     }, [])
     return (
         <div>
-            <Header cartLength={props.cart.number} auth={props.auth}/>
+            <Header cartLength={props.cart.number} auth={props.auth} logoutUser={props.logoutUser}/>
             <TransitionGroup>
-                <CSSTransition key={props.location.key} classNames="page" timeout={300}>
+                {/* <CSSTransition key={props.location.key} classNames="page" timeout={300}> */}
                     <div className="container">
                         <Switch>
                             <Route path="/" component={() => <Home dish={props.dish} addItem={props.addItem} />} exact />
@@ -60,7 +62,7 @@ const Main = (props) => {
                                                                                 deleteItemFromCart={props.deleteItemFromCart}
                                                                                 />} exact />
                             <Route path="/signup" component={()=><Signup signupGoogleLoading={props.signupGoogleLoading} signupGoogle={props.signupGoogle} auth={props.auth} signupGoogleError={props.signupGoogleError} signupLocalPost={props.signupLocalPost}/>} exact/>
-                            <Route path="/login" component={Login} exact/>
+                            <Route path="/login" component={()=><Login signupGoogleLoading={props.signupGoogleLoading} signupGoogle={props.signupGoogle} auth={props.auth} signupGoogleError={props.signupGoogleError} signupLocalPost={props.signupLocalPost} loginLocalPost={props.loginLocalPost}/>} exact/>
                             <Route path="/earn" component={Earn} />
                             <Route path="/about" component={About} />
                             <Route path="/add-product" component={() => <AddProduct dish={props.dish} postDish={props.postDish} />} />
@@ -69,7 +71,7 @@ const Main = (props) => {
                             <Redirect to="/" />
                         </Switch>
                     </div>
-                </CSSTransition>
+                {/* </CSSTransition> */}
             </TransitionGroup>
             <Footer />
         </div>
