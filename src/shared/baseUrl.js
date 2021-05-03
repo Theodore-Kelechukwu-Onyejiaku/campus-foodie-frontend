@@ -1,1 +1,1 @@
-export const baseUrl ="http://localhost:5000/"  ;// "https://campus-foodie-api.herokuapp.com/"
+export const baseUrl =   "https://campus-foodie-api.herokuapp.com/" ;//"http://localhost:5000/"
