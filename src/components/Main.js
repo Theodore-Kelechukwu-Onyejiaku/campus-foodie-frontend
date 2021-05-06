@@ -17,6 +17,7 @@ import Login from "./Authentication/Login";
 import Earn from "./Earn/Earn";
 import About from "./Pages/About";
 import AddProduct from "./Admin/AddProduct";
+import Dashboard from "./Admin/Dashboard";
 import Profile from "./User/Profile"
 import AccountActivation from "./User/AccountActivation"
 const mapStateToProps = (state) => {
@@ -65,9 +66,16 @@ const Main = (props) => {
                             <Route path="/login" component={()=><Login signupGoogleLoading={props.signupGoogleLoading} signupGoogle={props.signupGoogle} auth={props.auth} signupGoogleError={props.signupGoogleError} signupLocalPost={props.signupLocalPost} loginLocalPost={props.loginLocalPost}/>} exact/>
                             <Route path="/earn" component={Earn} />
                             <Route path="/about" component={About} />
-                            <Route path="/add-product" component={() => <AddProduct dish={props.dish} postDish={props.postDish} />} />
                             <Route path="/profile" component={()=> <Profile auth={props.auth}/>} />
                             <Route path="/account-activation" component={() => <AccountActivation auth={props.auth} />} />
+                            
+                            {/* FOR ADMIN */}
+                            <Route path="/admin/dashboard" component={()=> <Dashboard />} />
+                            <Route path="/admin/users" component={()=> <div>Users</div>} />
+                            <Route path="/admin/orders" component={()=> <div>Orders</div>}/>
+                            <Route path="/admin/dishes" component={()=> <div>Dishes</div>}/>
+                            <Route path="/admin/add-product" component={() => <AddProduct dish={props.dish} postDish={props.postDish} />} />
+                            
                             <Redirect to="/" />
                         </Switch>
                     </div>

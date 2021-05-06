@@ -1,6 +1,5 @@
 import * as ActionTypes from "../ActionTypes";
 import { baseUrl } from "../../shared/baseUrl";
-
 import history from "../history";
 
 
@@ -43,7 +42,11 @@ export const checkIsLoggedIn = () => dispatch => {
     fetch(baseUrl+"api/auth/verify",{
         method: "POST",
         body: JSON.stringify({token: token}),
-        headers: {"Content-type": "application/json"}
+        headers: {
+            'Accept': 'application/json',
+            "Content-type": "application/json",
+            'Authorization': 'Bearer ' + token,
+        }
     })
     .then(response => response.json())
     .then(result => {
@@ -114,12 +117,20 @@ export const loginLocalPost = (formData) => dispatch =>{
     })
     .then(async result =>{
         if(result.isActivated){
-            console.log("error on line 117")
-            localStorage.setItem("token",result.token);
-            await dispatch(signupLocal(result.user, result.token, result.message))
-            setTimeout(()=>{
-                history.push("/profile")
-            }, 1500)   
+            if(result.user.isAdmin){
+                localStorage.setItem("token",result.token);
+                await dispatch(signupLocal(result.user, result.token, result.message))
+                setTimeout(()=>{
+                    history.push("/admin/dashboard");
+                }, 1500) 
+            }else{
+                localStorage.setItem("token",result.token);
+                await dispatch(signupLocal(result.user, result.token, result.message))
+                setTimeout(()=>{
+                    history.push("/profile");
+                }, 1500) 
+            }
+              
         }else{
             dispatch(signupLocalError(result.message));
         }

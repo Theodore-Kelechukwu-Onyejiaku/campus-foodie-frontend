@@ -77,8 +77,13 @@ span.field-icon {
     background-color: #00aced;
 }
 
-.social-link.google{
+button.social-link.google{
     background-color: #dd4b39;
+    /* display:"flex";
+    flex-direction: row;
+    -ms-flex-direction: row;
+    justify-content:"space-between"; */
+    /* padding:"2% 20px" */
 }
 
 
@@ -149,4 +154,17 @@ span.field-icon {
 
 #see{
     transition:all 5s;
+}
+
+
+/* FOR ADMIN  DASHBOARD */
+.action-btn{
+    background-color: #ee6e73;
+    width: 260px;
+    height: 70px;
+    margin: 4px;
+    padding: 0;
+    line-height: 70px;
+    font-size: 18px;
+    font-weight: 400;
 }

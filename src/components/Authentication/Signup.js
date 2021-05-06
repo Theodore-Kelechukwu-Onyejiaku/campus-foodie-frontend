@@ -130,14 +130,13 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                                 <br/><span className="red-text">{passwordError}</span>
                                 </div>
                             }
-                            <button type="submit" className="btn pulse" disabled={disable} >Create Account</button>
+                            <button type="submit" className="btn" disabled={disable} >Create Account</button>
                         </div>
                     </form>
                     <div className="right-align">
-                        <span className="black-text">Have an account?<NavLink to="/login">Login</NavLink></span>
+                        <span className="black-text">Have an account?<NavLink to="/login">{" "}Login</NavLink></span>
                     </div>
                     <hr />
-                    <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Or</h4>
 
                     <GoogleLogin
                         clientId="1036410801170-q9bp27gfbqm9u9id57h29muvbr9s18rt.apps.googleusercontent.com"
@@ -153,9 +152,9 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     <div className="social-link facebook center-align">
                         <NavLink to="/#"><i className="fa fa-facebook fa-2x"></i><span>Signup with Facebook</span></NavLink>
                     </div>
-                    <div className="social-link twitter center-align">
+                    {/* <div className="social-link twitter center-align">
                         <NavLink className="" to="/#"><i className="fa fa-twitter fa-2x"></i><span>Signup with Twitter</span></NavLink>
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
