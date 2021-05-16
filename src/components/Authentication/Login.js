@@ -75,26 +75,21 @@ export default function Login({ signupGoogle, signupGoogleError, auth, signupGoo
             <div className="col s12 m8 l6">
                 <div className="row">
                 {auth.isLoading ? <Loader /> : <div></div>}
-                    {auth.successMess ? 
-                        <div class="row" style={{backgroundColor:"#00aced", color:"white"}}>
-                            <div className="col s12 m12 l12 pulse center-align">
-                                <i className="material-icons">info</i><br/>
-                                <span>{auth.successMess}</span>
-                            </div>
-                                
-                        </div>
-                    
-                        : <div></div>}
-                    {auth.errorMess ? 
-                        <div class="row" style={{backgroundColor:"#ee6e73", color:"white"}}>
-                            <div className="col s12 m12 l12 pulse center-align">
-                                <i className="material-icons">info</i><br/>
-                                <span>{auth.errorMess}</span>
-                            </div>
-                                
-                        </div>
-                    
-                        : <div></div>}
+                {/* Custom alert */}
+                {auth.errorMess ? 
+                    <div class="alert-danger">
+                        <span class="closebtn" onClick={()=>{document.querySelector(".alert-danger").style.display='none'}}>&times;</span>
+                        {auth.errorMess}
+                    </div>
+                : <div></div>}
+                {auth.successMess ? 
+                    <div class="alert-success">
+                        <span class="closebtn" onClick={()=>{document.querySelector(".alert-success").style.display='none'}}>&times;</span>
+                        {auth.successMess}
+                        
+                    </div>
+                : <div></div>}
+                {/* end of custom alert */}
                     <form className="col s12" onSubmit={(e)=>{handleSubmit(e)}}>
                         <h5 className="center-align">Welcome To Campus Foodie!</h5>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Login</h4>

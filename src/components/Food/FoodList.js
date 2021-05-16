@@ -1,5 +1,6 @@
 import React from "react";
 import {Fade, Stagger} from "react-animation-components";
+import naira from "../../images/naira.png"
 
 export default function FoodList({ dishes, addItem }) {
     return (
@@ -13,7 +14,7 @@ export default function FoodList({ dishes, addItem }) {
                             <img className="activator" src={dish.dishUrl} alt="dish" />
                         </div>
                         <div className="card-body">
-                            <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive",color:"white" }}>{dish.name}{" "}₦{dish.price}<i className="material-icons right">more_vert</i></span>
+                            <span className="card-title activator grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive",color:"white" }}>{dish.name}{" "}<img src={naira} alt="currency"/>{dish.price}<i className="material-icons right">more_vert</i></span>
                             <br/>
                             <button className='btn pulse' onClick={()=>{addItem(dish)}}><i className="material-icons left">add_shopping_cart</i>Add</button>
                             <hr/>
@@ -23,7 +24,7 @@ export default function FoodList({ dishes, addItem }) {
                             )}
                         </div>
                         <div className="card-reveal">
-                            <span className="card-title grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive" }}>{dish.name}<i className="material-icons right">close</i></span>
+                            <span className="card-title grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive", textTransform:"uppercase" }}>{dish.name}<i className="material-icons right">close</i></span>
                             <p>{dish.description}</p>
                             <hr/>
                             {dish.categories.map((cat, index) =>

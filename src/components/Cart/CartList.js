@@ -1,7 +1,18 @@
 import React from "react"
 import { Fade, Stagger } from "react-animation-components";
+import naira from "../../images/naira.png"
+
 
 export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, deleteItemFromCart }) {
+    const GetTotalCart = ({cart}) =>{
+        let sum = 0;
+        cart.forEach(item =>{
+            sum = sum + (Number(item.price) * Number(item.quantity))
+        })
+        return (
+            <span>Total: <img src={naira} alt="currency"/>{sum}</span>
+        )
+    }
     return (
         <div className="">
             {cart.length ?
@@ -18,7 +29,7 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
                                                 </div>
                                                 <div className="col s10">
                                                     <div className="left"><h5 style={{ fontFamily: "'Tangerine', cursive" }}>{cart.name}</h5></div>
-                                                    <div className="right"><h5 style={{ fontFamily: "'Tangerine', cursive" }}>₦{cart.price}</h5></div>
+                                                    <div className="right"><h5 style={{ fontFamily: "'Tangerine', cursive" }}><img src={naira} alt="currency"/>{cart.price}</h5></div>
                                                     <br />
                                                     <p className="black-text" style={{ clear: "both" }}>{cart.description}</p>
                                                     <hr />
@@ -44,7 +55,7 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
                         </Stagger>
                     </div>
                     <div className="col s12 m2">
-                        Total = <span></span>
+                        <GetTotalCart cart={cart}/>
                     </div>
                 </div>
                 : <div>No Cart Item!</div>
