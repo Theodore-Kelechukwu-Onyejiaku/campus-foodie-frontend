@@ -1,12 +1,17 @@
 import React from "react";
 import FoodList from "../Food/FoodList"
 import Loader from "../Layout/Loader"
+import Slider from "../Layout/Slider"
 
-export default function Home({ dish, addItem }) {
+export default function Home({ dish, addItem}) {
     return(
         <>
-        <div>  
-            <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Welcome to Campus-foodie</h4>
+        <div> 
+            <div className="row">
+                <div className="col s12 m8 l8">
+                    <Slider/>
+                </div>
+            </div>
             {dish.getDishLoading && <Loader/>}
             {(dish.dishes) ? 
                 <div>

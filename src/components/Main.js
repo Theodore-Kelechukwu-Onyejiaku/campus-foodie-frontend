@@ -12,6 +12,7 @@ import CartList from "./Cart/CartList";
 import Home from "./Home/Home";
 import Header from "./Layout/Header";
 import Footer from "./Layout/Footer";
+import PleaseLogin from "./Layout/PleaseLogin"
 import Signup from "./Authentication/Signup";
 import Login from "./Authentication/Login";
 import Earn from "./Earn/Earn";
@@ -55,7 +56,7 @@ const Main = (props) => {
             <Header cartLength={props.cart.number} auth={props.auth} logoutUser={props.logoutUser}/>
             <TransitionGroup>
                 {/* <CSSTransition key={props.location.key} classNames="page" timeout={300}> */}
-                    <div className="container">
+                    <div >
                         <Switch>
                             <Route path="/" component={() => <Home dish={props.dish} addItem={props.addItem} />} exact />
                             <Route path="/cart-list" component={() => <CartList cart={props.cart.cart} increaseItemInCart={props.increaseItemInCart} 
@@ -70,11 +71,11 @@ const Main = (props) => {
                             <Route path="/account-activation" component={() => <AccountActivation auth={props.auth} />} />
                             
                             {/* FOR ADMIN */}
-                            <Route path="/admin/dashboard" component={()=> <Dashboard />} />
+                            <Route path="/admin/dashboard" component={()=> props.auth.user.email ? <Dashboard />: <PleaseLogin/>} />
                             <Route path="/admin/users" component={()=> <div>Users</div>} />
                             <Route path="/admin/orders" component={()=> <div>Orders</div>}/>
                             <Route path="/admin/dishes" component={()=> <div>Dishes</div>}/>
-                            <Route path="/admin/add-product" component={() => <AddProduct dish={props.dish} postDish={props.postDish} />} />
+                            <Route path="/admin/add-product" component={() =>props.auth.user.email ? <AddProduct dish={props.dish} postDish={props.postDish} />: <PleaseLogin/>} />
                             
                             <Redirect to="/" />
                         </Switch>

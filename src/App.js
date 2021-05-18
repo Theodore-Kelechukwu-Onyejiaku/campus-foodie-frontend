@@ -13,10 +13,13 @@ export default function App(){
   useEffect(()=>{
     window.addEventListener('load', function() {
       var elems = document.querySelectorAll('.sidenav'); 
-       
+      var car = document.querySelectorAll('.carousel');
+
       M.Sidenav.init(elems, {});
+      M.Carousel.init(car, {});
     });
-      
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
     return (
       <Provider store={store}>

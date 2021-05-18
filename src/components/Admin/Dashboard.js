@@ -1,40 +1,51 @@
-import React from 'react';
-import { NavLink } from "react-router-dom"
+import React, { useEffect, useState } from 'react';
+import {baseUrl}  from "../../shared/baseUrl";
+import AdminTools from "../Layout/AdminTools";
+
+import Home from "./Home"
 
 
 const Dashboard = () => {
-    return (
-        <div>
-            <h1 style={{ fontFamily: "'Tangerine', cursive" }}>Admin Dashboard</h1>
-            <h6>Welcome to admin dashbaord!</h6>
-            <div className="row">
-                <div className="col s12 m6 ">
-                    <div className="col s12 m6" style={{width:"100%", margin:"auto",textAlign:"center"}}>
-                        <NavLink to="/admin/add-product" className="btn-large waves-effect waves-light action-btn" >Add Product </NavLink>
-                        <p></p>
-                    </div>
-                </div>
-                <div className="col s12 m6">
-                    <div className="col s12 m6" style={{width:"100%", margin:"auto",textAlign:"center"}}>
-                        <NavLink to="/admin/users" className="btn-large waves-effect waves-light action-btn" >View All Users</NavLink>
-                    </div>
-                </div>
-            </div>
 
-            <div className="row">
-                <div className="col s12 m6 ">
-                    <div className="col s12 m6" style={{width:"100%", margin:"auto",textAlign:"center"}}>
-                        <NavLink to="/admin/add-product" className="btn-large waves-effect waves-light action-btn" >Products </NavLink>
-                        <p></p>
-                    </div>
-                </div>
-                <div className="col s12 m6">
-                    <div className="col s12 m6" style={{width:"100%", margin:"auto",textAlign:"center"}}>
-                        <NavLink to="/admin/users" className="btn-large waves-effect waves-light action-btn" >View All Users</NavLink>
-                    </div>
-                </div>
-            </div>
+    const [result, setResult] = useState({});
+    const [error , setError] = useState("");
+    useEffect(()=>{
+    const token = localStorage.getItem("token");
+        fetch(baseUrl+"api/admin/dashboard",{
+            headers: {
+                'Accept': 'application/json',
+                "Content-type": "application/json",
+                'Authorization': 'Bearer ' + token,
+            }
+        })
+    .then(response => {
+        if(response.ok) return response.json();
+        else {
+            const error=  new Error()
+            error.message = "Something went wrong!";
+            throw error;
+        }
+    })
+    .then(async (result) =>{
+        setResult(result)
+    })
+    .catch(error =>{
+        setError(error.message)
+    })
+
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[])
+    return (
+        <>
+        <div className="row">
+            <AdminTools />
+            <Home id="test1" result={result} error={error}/>
+            <div id="test2">test2</div>
+            <div id="test3">test3</div>
+            <div id="test4">test4</div>
+
         </div>
+        </>
     )
 }
 

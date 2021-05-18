@@ -14,6 +14,10 @@ export default function Header({ cartLength, auth, logoutUser}) {
             <Link to="#" data-target="mobile-demo" className="sidenav-trigger"><i className="material-icons">menu</i></Link>
 
             <ul id="nav-mobile" className="right hide-on-med-and-down">
+              <li>
+              
+       
+              </li>
             {auth.user.email ? 
               <li><NavLink  to="/login" onClick={()=>{logoutUser()}}><i className="material-icons white-text left"><i className="fa fa-sign-out"></i></i>Logout</NavLink></li>
               :
