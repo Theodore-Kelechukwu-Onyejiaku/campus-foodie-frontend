@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import AdminTools from "../Layout/AdminTools"
+
 import M from 'materialize-css/dist/js/materialize.min.js'
 
 
@@ -79,7 +81,8 @@ const AddProduct = ({ dish, postDish }) => {
     }
 
     return (
-        <div className="row top-margin">
+        <div className="container">
+            <AdminTools />
             {successReport ? <div className="green white-text center-align successMessage">{successReport}</div>: <div></div>}
             {errorReport ? <div className="red white-text center-align errorMessage">{errorReport}</div>: <div></div>}
             {loading &&<div className="center-align"><div className="preloader-wrapper big active">

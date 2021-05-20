@@ -17,10 +17,14 @@ import Signup from "./Authentication/Signup";
 import Login from "./Authentication/Login";
 import Earn from "./Earn/Earn";
 import About from "./Pages/About";
-import AddProduct from "./Admin/AddProduct";
-import Dashboard from "./Admin/Dashboard";
+
 import Profile from "./User/Profile"
 import AccountActivation from "./User/AccountActivation"
+
+import AddProduct from "./Admin/AddProduct";
+import Dashboard from "./Admin/Dashboard";
+import AllUsers from "./Admin/AllUsers";
+
 const mapStateToProps = (state) => {
     return {
         dish: state.dish,
@@ -72,7 +76,7 @@ const Main = (props) => {
                             
                             {/* FOR ADMIN */}
                             <Route path="/admin/dashboard" component={()=> props.auth.user.email ? <Dashboard />: <PleaseLogin/>} />
-                            <Route path="/admin/users" component={()=> <div>Users</div>} />
+                            <Route path="/admin/users" component={()=> props.auth.user.email ? <AllUsers />: <PleaseLogin/>} />
                             <Route path="/admin/orders" component={()=> <div>Orders</div>}/>
                             <Route path="/admin/dishes" component={()=> <div>Dishes</div>}/>
                             <Route path="/admin/add-product" component={() =>props.auth.user.email ? <AddProduct dish={props.dish} postDish={props.postDish} />: <PleaseLogin/>} />

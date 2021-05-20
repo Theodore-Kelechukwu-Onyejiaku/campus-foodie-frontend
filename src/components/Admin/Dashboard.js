@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {baseUrl}  from "../../shared/baseUrl";
-import AdminTools from "../Layout/AdminTools";
+// import AdminTools from "../Layout/AdminTools";
 
 import Home from "./Home"
 
@@ -38,12 +38,8 @@ const Dashboard = () => {
     return (
         <>
         <div className="row">
-            <AdminTools />
+            {/* <AdminTools /> */}
             <Home id="test1" result={result} error={error}/>
-            <div id="test2">test2</div>
-            <div id="test3">test3</div>
-            <div id="test4">test4</div>
-
         </div>
         </>
     )
