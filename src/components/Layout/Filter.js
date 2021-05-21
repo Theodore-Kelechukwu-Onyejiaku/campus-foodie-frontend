@@ -1,22 +1,22 @@
 import React from "react"
 
-const Filter = ({ clearFilteration, filteration }) => {
+const Filter = ({ clearFilteration, filteration, search, onInputSearchKey, searchKey, clearSearchKey}) => {
     return (
-        <div className="col s12 m4" style={{ position: "fixed", right: "0%",top:"50px", height: "1000px", overflow:"scroll"}}>
+        <div className="col s12 m4" style={{ position: "fixed", right: "0%",top:"50px", height: "1000px", overflow:"scroll", zIndex: 1, backgroundColor:"white"}}>
             <nav>
                 <div class="nav-wrapper">
-                <form>
+                {/* <form> */}
                     <div class="input-field">
-                    <input id="search" type="search" required/>
-                    <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                    <i class="material-icons">close</i>
+                    <input id="search" type="search" required onChange={(e)=>{onInputSearchKey(e)}} value={searchKey}/>
+                    <label class="label-icon" onClick={()=>{search()}} for="search" style={{cursor:"pointer"}}><i class="material-icons">search</i></label>
+                    <i class="material-icons" onClick={()=> {clearSearchKey()}}>close</i>
                     </div>
-                </form>
+                {/* </form> */}
                 </div>
             </nav>
             <h5 style={{ fontFamily: "'Tangerine', cursive", display: "flex" }}>
-                <button className="btn waves-effect waves-light" style={{ marginRight: "10px" }}>Filter <i className="material-icons">filter_list</i></button>
-                <button onClick={() => { clearFilteration() }} className="btn waves-effect waves-light red">Clear Filter<i className="material-icons left">clear</i></button>
+                <button className="btn  waves-light" style={{ marginRight: "10px" }}>Filter <i className="material-icons">filter_list</i></button>
+                <button onClick={() => { clearFilteration() }} className="btn  waves-light red">Clear Filter<i className="material-icons left">clear</i></button>
             </h5>
             <div className="row">
                 <form name="filter">

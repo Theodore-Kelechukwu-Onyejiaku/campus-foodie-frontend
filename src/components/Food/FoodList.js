@@ -8,17 +8,27 @@ export default function FoodList({ dishes, addItem }) {
 
     const [dishList, setDishList] = useState(dishes);
     const [noResult, setNoResult] = useState("");
+    const [searchKey, setSearchKey] = useState("");
 
     const filteration = (e) => {
 
         let filter = []
-        for (let eachDish of dishes) {
-            for (let eachCategory of eachDish.categories) {
-                if (eachCategory === e.target.value) {
-                    filter.push(eachDish);
+        // for (let eachDish of dishes) {
+        //     for (let eachCategory of eachDish.categories) {
+        //         if (eachCategory === e.target.value) {
+        //             filter.push(eachDish);
+                
+        //         }
+        //     }
+        // }
+        dishes.forEach((eachDish, index, dishes)=>{
+            eachDish.categories.forEach((eachCategory)=>{
+                if(eachCategory === e.target.value){
+                    filter.push(eachDish)
                 }
-            }
-        }
+            })
+        })
+
         if (filter.length) {
             setNoResult("");
             setDishList(filter);
@@ -40,10 +50,43 @@ export default function FoodList({ dishes, addItem }) {
         setDishList(dishes)
         unCheckRadios()
     }
+
+    const onInputSearchKey = (e) =>{
+            setSearchKey(e.target.value)
+    }
+
+    const search = () =>{
+        unCheckRadios();
+        setDishList([])
+        let searchResult = []
+        for (let eachDish of dishes) {
+                if (eachDish.name === searchKey) {
+                    searchResult.push(eachDish);
+                }
+        }
+        if (searchResult.length) {
+            setNoResult("");
+            setDishList(searchResult);
+        } else {
+            setNoResult("No Result Found!");
+            setDishList([]);
+        }
+    }
+    const clearSearchKey = () =>{
+        setSearchKey("");
+        setNoResult("");
+        setDishList(dishes)
+    }
     return (
         <div className="row">
             <div className="col s12 m8">
-                
+                {/* <form> */}
+                <div class="input-field">
+                    <input id="search" type="search" required onChange={(e)=>{onInputSearchKey(e)}} value={searchKey}/>
+                    <label class="label-icon" onClick={()=>{search()}} for="search" style={{cursor:"pointer"}}><i class="material-icons">search</i></label>
+                    <i class="material-icons" onClick={()=> {clearSearchKey()}}>close</i>
+                    </div>
+                {/* </form> */}
                 <Stagger in>
                     {dishList && dishList.map((dish, index) =>
                         <Fade key={index} in="true">
@@ -78,7 +121,12 @@ export default function FoodList({ dishes, addItem }) {
                 <div className="red-text center-align" style={{ position: "fixed", left: "20%" }}>{noResult}</div>
             </div>
             <div className="hide-on-small-only">
-                <Filter clearFilteration={clearFilteration} filteration={filteration} />
+                <Filter clearFilteration={clearFilteration} 
+                    filteration={filteration} 
+                    searchKey={searchKey} search={search} 
+                    onInputSearchKey={onInputSearchKey}
+                    clearSearchKey={clearSearchKey}
+                />
             </div>
         </div>
     )
