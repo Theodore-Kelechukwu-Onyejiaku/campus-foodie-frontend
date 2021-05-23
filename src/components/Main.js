@@ -19,11 +19,13 @@ import Earn from "./Earn/Earn";
 import About from "./Pages/About";
 
 import Profile from "./User/Profile"
-import AccountActivation from "./User/AccountActivation"
+import AccountActivation from "./User/AccountActivation";
+import SingleUser from "./User/SingleUser";
 
 import AddProduct from "./Admin/AddProduct";
 import Dashboard from "./Admin/Dashboard";
 import AllUsers from "./Admin/AllUsers";
+import AllProducts from "./Admin/AllProducts";
 
 const mapStateToProps = (state) => {
     return {
@@ -76,11 +78,12 @@ const Main = (props) => {
                             
                             {/* FOR ADMIN */}
                             <Route path="/admin/dashboard" component={()=> props.auth.user.email ? <Dashboard />: <PleaseLogin/>} />
-                            <Route path="/admin/users" component={()=> props.auth.user.email ? <AllUsers />: <PleaseLogin/>} />
+                            <Route path="/admin/users" component={()=> props.auth.user.email ? <AllUsers />: <PleaseLogin/>}  exact/>
+                            <Route path="/admin/products" component={()=> props.auth.user.email ? <AllProducts dishList={props.dish}/>: <PleaseLogin/>} />
                             <Route path="/admin/orders" component={()=> <div>Orders</div>}/>
                             <Route path="/admin/dishes" component={()=> <div>Dishes</div>}/>
                             <Route path="/admin/add-product" component={() =>props.auth.user.email ? <AddProduct dish={props.dish} postDish={props.postDish} />: <PleaseLogin/>} />
-                            
+                            <Route path="/admin/users/:id" component={() => props.auth.user.email ? <SingleUser/> : <PleaseLogin/>} />
                             <Redirect to="/" />
                         </Switch>
                     </div>

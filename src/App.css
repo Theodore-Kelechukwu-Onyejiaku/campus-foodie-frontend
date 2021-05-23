@@ -213,11 +213,12 @@ button.social-link.google{
 /* END OF CUSTOM ALERT */
 
 .badge-info{
-    position: absolute;
-    top:0;
-    right:0;
-    width:10%;
+    padding:3%;
+    margin:1%;
     color:white;
     background-color: #26a69a;
-    font-size: small;
+}
+
+.list-item:hover{
+    opacity: .5;
 }

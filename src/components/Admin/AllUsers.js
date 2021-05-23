@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AdminTools from "../Layout/AdminTools"
 import { baseUrl } from "../../shared/baseUrl";
+import { NavLink } from "react-router-dom";
 
 const AllUsers = () => {
     const [result, setResult] = useState([]);
@@ -32,13 +33,15 @@ const AllUsers = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    
+
 
     return (
         <div className="container">
             <AdminTools />
-            <h4>All Users</h4>
+            <h4>All Users <small className="bagde-info"><strong>{result.length}</strong></small></h4>
             {error !== "" ? <div> Something Went Wrong!</div> : 
-            <table className="responsive-table striped highlight">
+            <table className="responsive-table highlight">
                 <thead>
                     <tr>
                         <th>Picture</th>
@@ -48,13 +51,13 @@ const AllUsers = () => {
                     </tr>
                 </thead>
                 <tbody>
-                { result.map(eachUSer =>
-                        <tr>
+                { result.map(eachUser =>
+                        <tr key={eachUser._id}>
                             
-                            {eachUSer.picture ? <td><img src={eachUSer.picture} width="20px" height="alto" alt="social icon"></img></td> : <td>None</td>}
-                            <td>{eachUSer.email}</td>
-                            <td>{eachUSer.orders.length}</td>
-                            <td><button className="btn"><i className="material-icons">remove_red_eye</i></button></td>
+                            {eachUser.picture ? <td><img src={eachUser.picture} width="20px" height="alto" alt="social icon"></img></td> : <td><i className="fa fa-user"></i></td>}
+                            <td>{eachUser.email}</td>
+                            <td>{eachUser.orders.length}</td>
+                            <td><NavLink to={"/admin/users/"+eachUser._id} className="btn"><i className="material-icons">remove_red_eye</i></NavLink></td>
                         </tr>
                     )
                 }
