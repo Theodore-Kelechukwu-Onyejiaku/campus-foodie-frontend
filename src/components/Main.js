@@ -17,6 +17,7 @@ import Signup from "./Authentication/Signup";
 import Login from "./Authentication/Login";
 import Earn from "./Earn/Earn";
 import About from "./Pages/About";
+import FourOThree from "./Errors/403";
 
 import Profile from "./User/Profile"
 import AccountActivation from "./User/AccountActivation";
@@ -26,6 +27,7 @@ import AddProduct from "./Admin/AddProduct";
 import Dashboard from "./Admin/Dashboard";
 import AllUsers from "./Admin/AllUsers";
 import AllProducts from "./Admin/AllProducts";
+import EditProduct from "./Admin/EditProduct";
 
 const mapStateToProps = (state) => {
     return {
@@ -75,11 +77,13 @@ const Main = (props) => {
                             <Route path="/about" component={About} />
                             <Route path="/profile" component={()=> <Profile auth={props.auth}/>} />
                             <Route path="/account-activation" component={() => <AccountActivation auth={props.auth} />} />
-                            
+                            <Route path="/403" component={FourOThree} />
+
                             {/* FOR ADMIN */}
                             <Route path="/admin/dashboard" component={()=> props.auth.user.email ? <Dashboard />: <PleaseLogin/>} />
                             <Route path="/admin/users" component={()=> props.auth.user.email ? <AllUsers />: <PleaseLogin/>}  exact/>
-                            <Route path="/admin/products" component={()=> props.auth.user.email ? <AllProducts dishList={props.dish}/>: <PleaseLogin/>} />
+                            <Route path="/admin/products" component={()=> props.auth.user.email ? <AllProducts dishList={props.dish}/>: <PleaseLogin/>} exact/>
+                            <Route path="/admin/products/:id/edit" component={()=> props.auth.user.email ? <EditProduct />: <PleaseLogin/>} />
                             <Route path="/admin/orders" component={()=> <div>Orders</div>}/>
                             <Route path="/admin/dishes" component={()=> <div>Dishes</div>}/>
                             <Route path="/admin/add-product" component={() =>props.auth.user.email ? <AddProduct dish={props.dish} postDish={props.postDish} />: <PleaseLogin/>} />

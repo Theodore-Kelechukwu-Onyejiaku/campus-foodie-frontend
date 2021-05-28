@@ -14,7 +14,6 @@ export default function App(){
     window.addEventListener('load', function() {
       var elems = document.querySelectorAll('.sidenav'); 
       var car = document.querySelectorAll('.carousel');
-      var drop = document.querySelectorAll('.dropdown-trigger');
         
       M.Sidenav.init(elems, {});
       M.Carousel.init(car, {});

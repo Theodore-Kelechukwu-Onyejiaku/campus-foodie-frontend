@@ -12,6 +12,8 @@ const Display = ({user, title}) =>{
 
         case "account":
             return <Account />
+        default:
+            return <div></div>
     }
 }
 
@@ -118,7 +120,7 @@ const Dropdown = ({titleSetter}) =>{
     )
 }
 
-const SingleUser = ({}) =>{
+const SingleUser = () =>{
     const [user, setUser] = useState({})
     const [title, setTitle ] = useState("profile")
     const titleSetter = (title)=>{

@@ -89,7 +89,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
     }
 
     return (
-        <div className="row" style={{ marginTop: "5%" }}>
+        <div className="container row" style={{ marginTop: "5%" }}>
             <div className="col s12 m2 l3"></div>
             <div className="col s12 m8 l6">
                 <div className="row">
@@ -109,8 +109,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     </div>
                 : <div></div>}
                 {/* end of custom alert */}
-                    <form className="col s12" onSubmit={(e)=>{handleSubmit(e)}}>
-                        <h5 className="center-align">Welcome To Campus Foodie!</h5>
+                    <form  onSubmit={(e)=>{handleSubmit(e)}}>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Create an Account!</h4>
                         <div className="row">
                             <div className="input-field col s12">

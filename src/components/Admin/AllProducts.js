@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import { Fade, Stagger } from "react-animation-components";
 import { NavLink } from "react-router-dom";
 import naira from "../../images/naira.png"
@@ -28,8 +28,8 @@ const AllProducts = ({dishList}) =>{
                                             <div key={index} className="chip" style={{ fontFamily: "'Tangerine', cursive" }}>{cart}</div>
                                         )}
                                         <br/>
-                                        <NavLink to="/dkskdf" className="btn"><i className="fa fa-pencil"></i></NavLink>
-                                        <NavLink to="/dadf" className="btn red"><i className="fa fa-trash"></i></NavLink>
+                                        <NavLink to={"/admin/products/"+dish._id+"/edit"} className="btn"><i className="fa fa-pencil"></i></NavLink>
+                                        {" "}<NavLink to="/dadf" className="btn red"><i className="fa fa-trash"></i></NavLink>
                                     </div>
                                     <div className="card-reveal">
                                         <span className="card-title grey-text text-darken-4" style={{ fontFamily: "'Tangerine', cursive", textTransform: "uppercase" }}>{dish.name}<i className="material-icons right">close</i></span>

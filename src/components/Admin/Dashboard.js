@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import {useHistory} from "react-router-dom"
 import {baseUrl}  from "../../shared/baseUrl";
 // import AdminTools from "../Layout/AdminTools";
 
@@ -6,7 +7,7 @@ import Home from "./Home"
 
 
 const Dashboard = () => {
-
+    const history = useHistory();
     const [result, setResult] = useState({});
     const [error , setError] = useState("");
     useEffect(()=>{
@@ -27,7 +28,11 @@ const Dashboard = () => {
         }
     })
     .then(async (result) =>{
-        setResult(result)
+        if(result.status){
+            history.push("/403")
+        }else{
+            setResult(result)
+        }
     })
     .catch(error =>{
         setError(error.message)
