@@ -42,7 +42,7 @@ const Dashboard = () => {
     },[])
     return (
         <>
-        <div className="row">
+        <div className="row container">
             <AdminTools />
             <Home id="test1" result={result} error={error}/>
         </div>

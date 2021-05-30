@@ -67,7 +67,7 @@ export default function EditProduct(){
             headers: {
                 'Accept': 'application/json',
                 "Content-type": "application/json",
-                'Authorization': 'Bearer ' + token,
+                'Authorization': 'Bearer ' + token
             }
         })
             .then(response => {

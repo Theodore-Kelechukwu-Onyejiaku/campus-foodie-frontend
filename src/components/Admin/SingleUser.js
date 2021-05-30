@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { baseUrl } from "../../shared/baseUrl";
+import AdminTools from "../Layout/AdminTools"
+
 
 
 const Display = ({user, title}) =>{
@@ -8,7 +10,7 @@ const Display = ({user, title}) =>{
             return <Profile details={user}/>
          
         case "orders":
-            return <Orders orders={user.orders}/>
+            return <Orders orders={user}/>
 
         case "account":
             return <Account />
@@ -161,7 +163,7 @@ const SingleUser = () =>{
     
     return(
         <div className="container" style={{backgroundColor:"#f5f5f5", height:"100%"}}>
-        
+            <AdminTools/>
             <Dropdown titleSetter={titleSetter}/>
             {title.toLocaleUpperCase()}
                 <Display user={user} title={title}/>

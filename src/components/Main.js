@@ -21,13 +21,13 @@ import FourOThree from "./Errors/403";
 
 import Profile from "./User/Profile"
 import AccountActivation from "./User/AccountActivation";
-import SingleUser from "./User/SingleUser";
 
 import AddProduct from "./Admin/AddProduct";
 import Dashboard from "./Admin/Dashboard";
 import AllUsers from "./Admin/AllUsers";
 import AllProducts from "./Admin/AllProducts";
 import EditProduct from "./Admin/EditProduct";
+import SingleUser from "./Admin/SingleUser";
 
 const mapStateToProps = (state) => {
     return {

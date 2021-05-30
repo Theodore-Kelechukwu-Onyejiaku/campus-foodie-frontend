@@ -85,7 +85,7 @@ export default function FoodList({ dishes, addItem }) {
                         <Fade key={index} in="true">
                             <div className="col s12 m6 l4" key={dish._id} height="300px">
                                 <div className="card">
-                                    <div className="card-image waves-effect waves-block waves-light">
+                                    <div className="card-image waves-block waves-light">
                                         <img className="activator" src={dish.dishUrl} alt="dish" />
                                     </div>
                                     <div className="card-body">
@@ -110,7 +110,6 @@ export default function FoodList({ dishes, addItem }) {
                             </div>
                         </Fade>
                     )}
-                    {!dishList.length &&  (<div className="red-text">No Products Available</div>)}
                 </Stagger>
                 <div className="red-text center-align" style={{ position: "fixed", left: "20%" }}>{noResult}</div>
             </div>

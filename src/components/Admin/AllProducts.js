@@ -67,7 +67,7 @@ const AllProducts = ({dishList}) =>{
                         <Fade key={index} in="true">
                             <div className="col s12 m6 l4" key={dish._id} height="300px">
                                 <div className="card">
-                                    <div className="card-image waves-effect waves-block waves-light">
+                                    <div className="card-image waves-block waves-light">
                                         <img className="activator" src={dish.dishUrl} alt="dish" />
                                     </div>
                                     <div className="card-body">
