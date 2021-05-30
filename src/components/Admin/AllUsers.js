@@ -3,6 +3,9 @@ import AdminTools from "../Layout/AdminTools"
 import { baseUrl } from "../../shared/baseUrl";
 import { NavLink } from "react-router-dom";
 
+import AdminToolFix from "../Layout/AdminToolFix";
+
+
 const AllUsers = () => {
     const [result, setResult] = useState([]);
     const [error, setError] = useState("");
@@ -64,6 +67,7 @@ const AllUsers = () => {
                 </tbody>
             </table>
             }
+            <AdminToolFix/>
         </div>
     )
 }

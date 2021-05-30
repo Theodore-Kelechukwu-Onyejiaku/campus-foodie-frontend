@@ -13,14 +13,7 @@ export default function FoodList({ dishes, addItem }) {
     const filteration = (e) => {
 
         let filter = []
-        // for (let eachDish of dishes) {
-        //     for (let eachCategory of eachDish.categories) {
-        //         if (eachCategory === e.target.value) {
-        //             filter.push(eachDish);
-                
-        //         }
-        //     }
-        // }
+        
         dishes.forEach((eachDish, index, dishes)=>{
             eachDish.categories.forEach((eachCategory)=>{
                 if(eachCategory === e.target.value){
@@ -81,11 +74,11 @@ export default function FoodList({ dishes, addItem }) {
         <div className="row">
             <div className="col s12 m8">
                 {/* <form> */}
-                <div class="input-field">
+                <div class="input-field hide-on-med-and-up">
                     <input id="search" type="search" required onChange={(e)=>{onInputSearchKey(e)}} value={searchKey}/>
                     <label class="label-icon" onClick={()=>{search()}} for="search" style={{cursor:"pointer"}}><i class="material-icons">search</i></label>
                     <i class="material-icons" onClick={()=> {clearSearchKey()}}>close</i>
-                    </div>
+                </div>
                 {/* </form> */}
                 <Stagger in>
                     {dishList && dishList.map((dish, index) =>
@@ -117,6 +110,7 @@ export default function FoodList({ dishes, addItem }) {
                             </div>
                         </Fade>
                     )}
+                    {!dishList.length &&  (<div className="red-text">No Products Available</div>)}
                 </Stagger>
                 <div className="red-text center-align" style={{ position: "fixed", left: "20%" }}>{noResult}</div>
             </div>

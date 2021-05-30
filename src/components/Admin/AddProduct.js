@@ -15,11 +15,11 @@ const AddProduct = ({ dish, postDish }) => {
     const [fileInputState, setFileInputState] = useState("");
     const [selectedFile, setSelectedFile] = useState("");
     const [previewSource, setPreviewSource] = useState("");
-    const [formData, setFormData] = useState({ dishName: "", price: "", description: "", dishPicture: "" });
+    const [formData, setFormData] = useState({ name: "", price: "", description: "", dishPicture: "", categories: "" });
     const [formError, setFormError] = useState("");
     const [successReport, setSuccessReport] = useState(dish.addDishsuccessMess);
     const [errorReport, setErrorReport] = useState(dish.addDishError);
-    const [loading, setLoading] = useState(dish.addDishLoading)
+    const [loading, setLoading] = useState(dish.addDishLoading);
  
     const handleFileInputChange = (e) => {
         const file = e.target.files[0];
@@ -98,9 +98,9 @@ const AddProduct = ({ dish, postDish }) => {
                 </div>
                 </div>
             }
-            <>
-            <div className="col s12 m3"></div>
-            <div className="col s12 m6">
+            <div className="row">
+            <div className="col s12 m3 l4"></div>
+            <div className="col s12 m6 l4">
                 <form action="" onSubmit={(e) => { handleSubmitFile(e) }} method="POST">
                     <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Add New Dish</h4>
                     {formError ? <h5 className="red-text center-align">Please fill all the fields</h5> : <></>}
@@ -113,9 +113,9 @@ const AddProduct = ({ dish, postDish }) => {
                         </div>
                         <div className="input-field col s6">
                             <i className="material-icons prefix">restaurant</i>
-                            <input id="icon_telephone" type="text" className="validate" onChange={(e, name = "dishName") => { handleInput(e, name) }} value={formData.dishName} />
+                            <input id="icon_telephone" type="text" className="validate" onChange={(e, name = "name") => { handleInput(e, name) }} value={formData.name} />
                             <label htmlFor="icon_telephone">Dish Name</label>
-                            {!formData.dishName ? <span className="red-text">Please fill in this field</span> : <span></span>}
+                            {!formData.name ? <span className="red-text">Please fill in this field</span> : <span></span>}
                         </div>
                     </div>
                     <div className="row">
@@ -156,8 +156,8 @@ const AddProduct = ({ dish, postDish }) => {
                 }
 
             </div>
-            <div className="col s12 m3"></div>
-            </>
+            <div className="col s12 m3 l4"></div>
+            </div>
         </div>
     );
 }

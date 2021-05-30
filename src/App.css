@@ -222,3 +222,7 @@ button.social-link.google{
 .list-item:hover{
     opacity: .5;
 }
+
+.base-link{
+    background: #ee6e73;
+}

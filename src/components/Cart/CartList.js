@@ -14,9 +14,9 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
         )
     }
     return (
-        <div className="">
+        <div className="container">
             {cart.length ?
-                <div className="row">
+                <div className="container row">
                     <div className="col s12 m8">
                         <Stagger in>
                             {cart && cart.map((cart, index) =>
