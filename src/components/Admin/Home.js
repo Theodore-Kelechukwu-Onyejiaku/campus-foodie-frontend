@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import AdminToolFix from "../Layout/AdminToolFix";
 
 
 export default function Home({ result, error }) {
@@ -54,7 +55,7 @@ export default function Home({ result, error }) {
                         </div>
                         : <div>Ooops! Something went wrong!</div>
                     }
-
+            <AdminToolFix/>
                 </div>
             }
         </>

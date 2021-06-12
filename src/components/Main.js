@@ -28,6 +28,7 @@ import AllUsers from "./Admin/AllUsers";
 import AllProducts from "./Admin/AllProducts";
 import EditProduct from "./Admin/EditProduct";
 import SingleUser from "./Admin/SingleUser";
+import AdminTools from "./Layout/AdminTools"
 
 const mapStateToProps = (state) => {
     return {
@@ -75,24 +76,27 @@ const Main = (props) => {
                             <Route path="/login" component={()=><Login signupGoogleLoading={props.signupGoogleLoading} signupGoogle={props.signupGoogle} auth={props.auth} signupGoogleError={props.signupGoogleError} signupLocalPost={props.signupLocalPost} loginLocalPost={props.loginLocalPost}/>} exact/>
                             <Route path="/earn" component={Earn} />
                             <Route path="/about" component={About} />
-                            <Route path="/profile" component={()=> <Profile auth={props.auth}/>} />
+                            <Route path="/profile" component={()=>props.auth.user.email ? <Profile auth={props.auth}/>: <PleaseLogin/>} />
                             <Route path="/account-activation" component={() => <AccountActivation auth={props.auth} />} />
                             <Route path="/403" component={FourOThree} />
 
                             {/* FOR ADMIN */}
                             <Route path="/admin/dashboard" component={()=> props.auth.user.email ? <Dashboard />: <PleaseLogin/>} />
                             <Route path="/admin/users" component={()=> props.auth.user.email ? <AllUsers />: <PleaseLogin/>}  exact/>
-                            <Route path="/admin/products" component={()=> props.auth.user.email ? <AllProducts dishList={props.dish}/>: <PleaseLogin/>} exact/>
+                            <Route path="/admin/products" component={()=> props.auth.user.email ? <AllProducts />: <PleaseLogin/>} exact/>
                             <Route path="/admin/products/:id/edit" component={()=> props.auth.user.email ? <EditProduct />: <PleaseLogin/>} />
                             <Route path="/admin/orders" component={()=> <div>Orders</div>}/>
                             <Route path="/admin/dishes" component={()=> <div>Dishes</div>}/>
-                            <Route path="/admin/add-product" component={() =>props.auth.user.email ? <AddProduct dish={props.dish} postDish={props.postDish} />: <PleaseLogin/>} />
+                            <Route path="/admin/add-product" component={() =><AddProduct dish={props.dish} postDish={props.postDish} />} />
                             <Route path="/admin/users/:id" component={() => props.auth.user.email ? <SingleUser/> : <PleaseLogin/>} />
                             <Redirect to="/" />
                         </Switch>
                     </div>
                 {/* </CSSTransition> */}
             </TransitionGroup>
+            {
+                props.auth.user.isAdmin && (<div className="hide-on-med-and-up"><AdminTools /></div>)
+            }
             <Footer />
         </div>
     )

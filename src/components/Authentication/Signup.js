@@ -90,8 +90,8 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
 
     return (
         <div className="container row" style={{ marginTop: "5%" }}>
-            <div className="col s12 m2 l3"></div>
-            <div className="col s12 m8 l6">
+            <div className="col s12 m3 l4"></div>
+            <div className="col s12 m6 l4">
                 <div className="row">
                     {auth.isLoading ? <Loader /> : <div></div>}
                     {/* Custom alert */}
@@ -161,7 +161,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
 
                 </div>
             </div>
-            <div className="col s12 m2 l3"></div>
+            <div className="col s12 m3 l6"></div>
         </div>
     )
 }

@@ -4,25 +4,44 @@ import { NavLink} from "react-router-dom";
 import naira from "../../images/naira.png";
 import { baseUrl } from "../../shared/baseUrl";
 
-import AdminTools from "../Layout/AdminTools"
+import AdminTools from "../Layout/AdminTools";
 import AdminToolFix from "../Layout/AdminToolFix";
 
 
-import M from 'materialize-css/dist/js/materialize.min.js'
+import M from 'materialize-css/dist/js/materialize.min.js';
 
 
-const AllProducts = ({dishList}) =>{
-    const [products , setProducts] = useState(dishList.dishes)
+const AllProducts = () =>{
+    const [products , setProducts] = useState([])
+    const token = localStorage.getItem("token");
+
+
     
     useEffect(()=>{
-        window.addEventListener('load', function () {
-            var elems = document.querySelectorAll('.chips');
-            M.Chips.init(elems);
-        });
+        fetch(baseUrl + "api/admin/all-dishes")
+        .then(response => {
+            console.log(response)
+            if (response.ok) return response.json();
+            else {
+                M.toast({ html: "Something went wrong!", classes:"red white-text" })
+                return
+            }
+        })
+        .then(result => {
+            console.log(result);
+            setProducts(result.products);
+        })
+        .catch(error => {
+                M.toast({ html: "Something went wrong!", classes:"red white-text" })
+                return
+        })        
+    
+    window.addEventListener('load', function () {
+        var elems = document.querySelectorAll('.chips');
+        M.Chips.init(elems);
     })
-
+})
     const deleteProduct = (id) =>{
-        const token = localStorage.getItem("token");
         const deleteProduct =  window.confirm("Are you sure you want to delete this product?")
         if(!deleteProduct) {
             return
@@ -52,7 +71,6 @@ const AllProducts = ({dishList}) =>{
         })
         .catch(error => {
             M.toast({ html: error.message, classes:"red white-text" })
-
         })
     }
     

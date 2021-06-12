@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import AdminTools from "../Layout/AdminTools"
+import AdminToolFix from "../Layout/AdminToolFix"
 
 import M from 'materialize-css/dist/js/materialize.min.js'
 
@@ -35,6 +35,7 @@ const AddProduct = ({ dish, postDish }) => {
     }
 
     const previewFile = (file) => {
+        console.log(file)
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
@@ -82,7 +83,7 @@ const AddProduct = ({ dish, postDish }) => {
 
     return (
         <div className="container">
-            <AdminTools />
+            {/* <AdminTools /> */}
             {successReport ? <div className="green white-text center-align successMessage">{successReport}</div>: <div></div>}
             {errorReport ? <div className="red white-text center-align errorMessage">{errorReport}</div>: <div></div>}
             {loading &&<div className="center-align"><div className="preloader-wrapper big active">
@@ -99,8 +100,8 @@ const AddProduct = ({ dish, postDish }) => {
                 </div>
             }
             <div className="row">
-            <div className="col s12 m3 l4"></div>
-            <div className="col s12 m6 l4">
+            <div className="col s12 m3 l3"></div>
+            <div className="col s12 m6 l6">
                 <form action="" onSubmit={(e) => { handleSubmitFile(e) }} method="POST">
                     <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Add New Dish</h4>
                     {formError ? <h5 className="red-text center-align">Please fill all the fields</h5> : <></>}
@@ -154,9 +155,9 @@ const AddProduct = ({ dish, postDish }) => {
                         <img src={previewSource} className="responsive-img" alt="chosen" />
                     )
                 }
-
+                    <AdminToolFix/>
             </div>
-            <div className="col s12 m3 l4"></div>
+            <div className="col s12 m3 l3"></div>
             </div>
         </div>
     );

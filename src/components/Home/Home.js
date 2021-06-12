@@ -18,7 +18,7 @@ export default function Home({ dish, addItem}) {
                     <FoodList addItem={addItem} dishes={dish.dishes}/>
                 </div>
                 :
-                <div className="red white-text center-align errorMessage">{dish.errorMess}</div>
+                <div className="red-text">{dish.errorMess}</div>
             }
         </div>
         </>

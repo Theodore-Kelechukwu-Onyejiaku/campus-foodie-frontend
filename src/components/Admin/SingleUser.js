@@ -21,12 +21,12 @@ const Display = ({user, title}) =>{
 
 const Profile = ({details}) =>{
     return(
-        <div class="col s12 m8 offset-m2 l6 offset-l3">
-        <div class="card-panel grey lighten-5 z-depth-1">
-          <div class="row valign-wrapper">
-            <div class="col s2">
+        <div className="offset-m2 l6 offset-l3">
+        <div >
+          <div className="row valign-wrapper">
+            <div className="col s2">
               {
-                  details.picture ? <img src={details.picture} alt="profile-pic" class="circle responsive-img"/>
+                  details.picture ? <img src={details.picture} alt="profile-pic" className="circle responsive-img"/>
                   : <i className="fa fa-user fa-2x"></i>
               }
 
@@ -35,10 +35,10 @@ const Profile = ({details}) =>{
               {details.username}
             </div>
           </div>
-          <div class="row">
+          <div className="row">
               <div className="col s12 m6 l4">
                     <hr/>
-                    <span class="black-text">
+                    <span className="black-text">
                         Email :{details.email}
                     </span><br/>
                     <span>
@@ -102,12 +102,12 @@ const Dropdown = ({titleSetter}) =>{
     }
     return(
         <>
-            <button className="btn" onClick={()=>{hideOrShow()}}>
+            {/* <button className="btn" onClick={()=>{hideOrShow()}}>
                 More { !isOpen ? <i className="fa fa-caret-down"></i>    
                     :
                         <i className="fa fa-caret-up"></i>
                     }
-            </button>
+            </button> */}
             {!isOpen ? <div></div>
                : <div>
                     <ul className="collection highlight">
@@ -162,12 +162,17 @@ const SingleUser = () =>{
     
     
     return(
-        <div className="container" style={{backgroundColor:"#f5f5f5", height:"100%"}}>
+        <div className="container">
             <AdminTools/>
-            <Dropdown titleSetter={titleSetter}/>
-            {title.toLocaleUpperCase()}
-                <Display user={user} title={title}/>
-            <div></div>
+            <div className="row" style={{margin:"5% auto"}}>
+                <div className="col s12 m4">
+                    <Dropdown titleSetter={titleSetter}/>
+                </div>
+                <div className="col s12 m8" style={{margin:"10% auto"}}>
+                    {title.toLocaleUpperCase()}
+                    <Display user={user} title={title}/>
+                </div>
+            </div>
         </div>
     )
 }

@@ -48,9 +48,15 @@ export default function Login({ signupGoogle, signupGoogleError, auth, signupGoo
                     // Successful
                     localStorage.setItem("token", data.token);
                     await signupGoogle(data.user, data.token, data.message)
-                    setTimeout(()=>{
-                        history.push("/profile")
-                    }, 1500)
+                    if(data.user.isAdmin){
+                        setTimeout(()=>{
+                            history.push("/admin/dashboard")
+                        }, 1500)
+                    }else{
+                        setTimeout(()=>{
+                            history.push("/profile")
+                        }, 1500)
+                    }
                 }
                 else {
                     console.log("baba just display error jorr")

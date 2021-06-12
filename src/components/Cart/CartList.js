@@ -33,11 +33,12 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
                                                     <br />
                                                     <p className="black-text" style={{ clear: "both" }}>{cart.description}</p>
                                                     <hr />
-                                                    <div className="left">
-                                                        <button className="btn"><i className="material-icons" onClick={() => { decreaseItemInCart(cart) }}>remove</i></button>
+                                                    <div className="">
                                                         <button className="btn"><i className="material-icons" onClick={() => { increaseItemInCart(cart) }}>add</i></button>
+                                                        <button className="btn"><i className="material-icons" onClick={() => { decreaseItemInCart(cart) }}>remove</i></button>
                                                     </div>
-                                                    <div className="right">
+                                                    <br/>
+                                                    <div className="">
                                                         <button className="btn btn-waves quantity"><i className="material-icons left">shopping_cart</i>{cart.quantity}</button>
                                                     </div>
                                                 </div>

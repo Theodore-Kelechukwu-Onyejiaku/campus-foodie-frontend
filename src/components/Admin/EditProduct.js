@@ -15,7 +15,7 @@ export default function EditProduct(){
     
     
     const handleInput = (e, name) => {
-        let value = e.target.value;
+        let value = e.target.value.replace(/\s+/g, '').split(",")
         console.log(dish)
         setDish(Object.assign({}, dish, {[name]: value}));
     }
