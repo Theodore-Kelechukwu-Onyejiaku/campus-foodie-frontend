@@ -69,6 +69,7 @@ export const getAllDishes = () => (dispatch)=>{
         }
     })
     .then(result =>{
+        console.log("The dishes are: "+result.dishes)
         dispatch(getDishes(result.dishes));
     })
     .catch(error =>{

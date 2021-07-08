@@ -6,9 +6,6 @@ import {baseUrl} from "../../shared/baseUrl";
 import M from 'materialize-css/dist/js/materialize.min.js'
 
 
-
-
-
 export default function Signup({ signupGoogle, signupGoogleError, auth, signupGoogleLoading, signupLocalPost }) {
     const [visible, setVisible] = useState(false);
     const [passwordValue, setPasswordValue] = useState("");
@@ -139,12 +136,15 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     <div className="right-align">
                         <span className="black-text">Have an account?<NavLink to="/login">{" "}Login</NavLink></span>
                     </div>
-                    <hr />
+                    <p></p>
 
                     <GoogleLogin
                         clientId="1036410801170-q9bp27gfbqm9u9id57h29muvbr9s18rt.apps.googleusercontent.com"
                         render={renderProps => (
-                            <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="social-link google"><i className="fa fa-google fa-2x"></i><span>Signup with Google</span></button>
+                            <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="social-link google" style={{borderRadius:"3px",fontSize:"20px", boxShadow: "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%)"}}>
+                                <i  style={{padding:"4%", border: "thin solid white", float:"left"}} className="fa fa-google"></i>
+                                <span style={{padding:"4%", float:"left"}}>Signup with Google</span>
+                            </button>
                         )}
                         buttonText="Login"
                         onSuccess={responseGoogle}
@@ -152,9 +152,9 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                         cookiePolicy={'single_host_origin'}
                     />
 
-                    <div className="social-link facebook center-align">
+                    {/* <div className="social-link facebook center-align">
                         <NavLink to="/#"><i className="fa fa-facebook fa-2x"></i><span>Signup with Facebook</span></NavLink>
-                    </div>
+                    </div> */}
                     {/* <div className="social-link twitter center-align">
                         <NavLink className="" to="/#"><i className="fa fa-twitter fa-2x"></i><span>Signup with Twitter</span></NavLink>
                     </div> */}

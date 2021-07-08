@@ -26,13 +26,13 @@ class Slider extends Component {
         }}
         className="carousel"
       >
-        <div class="carousel-item" ><img  alt="slider" src={pic1} width="200px" height="200px"/></div>
-                <div class="carousel-item" ><img  alt="slider" src={pic2} width="200px" height="200px"/>
+        <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic1}/></div>
+                <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic2}/>
                   <span>Burger</span>
                 </div>
-                <div class="carousel-item" ><img  alt="slider" src={pic3} width="200px" height="200px"/></div>
-                <div class="carousel-item" ><img  alt="slider" src={pic4} width="200px" height="200px"/></div>
-                <div class="carousel-item" ><img  alt="slider" src={pic5} width="200px" height="200px"/></div>
+                <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic3}/></div>
+                <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic4}/></div>
+                <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic5}/></div>
         
       </div>
     );

@@ -18,10 +18,12 @@ const AllProducts = () =>{
 
     
     useEffect(()=>{
-        fetch(baseUrl + "api/admin/all-dishes")
+        fetch(baseUrl + "api/admin/products")
         .then(response => {
             console.log(response)
-            if (response.ok) return response.json();
+            if (response.ok){
+                return response.json()
+            }
             else {
                 M.toast({ html: "Something went wrong!", classes:"red white-text" })
                 return
@@ -40,7 +42,7 @@ const AllProducts = () =>{
         var elems = document.querySelectorAll('.chips');
         M.Chips.init(elems);
     })
-})
+}, [])
     const deleteProduct = (id) =>{
         const deleteProduct =  window.confirm("Are you sure you want to delete this product?")
         if(!deleteProduct) {
@@ -75,7 +77,7 @@ const AllProducts = () =>{
     }
     
     return(
-        <div className="container">
+        <div className="row container">
             <AdminTools/>
             <h4>All Products <small>{products.length}</small></h4>
             <div className="row">

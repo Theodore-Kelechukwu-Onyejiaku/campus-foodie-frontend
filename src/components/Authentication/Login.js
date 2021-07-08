@@ -121,26 +121,28 @@ export default function Login({ signupGoogle, signupGoogleError, auth, signupGoo
                             <button type="submit" className="btn">Login</button>
                         </div>
                     </form>
+                    <p></p>
                     <div className="right-align">
                         <span className="black-text">Don't have an account?<NavLink to="/signup">{" "}Signup</NavLink></span>
                     </div>
-                    <hr />
+                    <p></p>
 
                     <GoogleLogin
                         clientId="1036410801170-q9bp27gfbqm9u9id57h29muvbr9s18rt.apps.googleusercontent.com"
                         render={renderProps => (
-                            <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="social-link google" style={{display:"flex",justifyContent:"space-around", padding:"3px 70px"}}>
-                                <i className="fa fa-google fa-3x"></i>
-                                <span style={{padding:"4%"}}>Login with Google</span></button>
+                            <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="social-link google" style={{borderRadius:"3px",fontSize:"20px", boxShadow: "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%)"}}>
+                                <i  style={{padding:"4%", border: "thin solid white", float:"left"}} className="fa fa-google"></i>
+                                <span style={{padding:"4%", float:"left"}}>Login with Google</span>
+                                </button>
                         )}
                         buttonText="Login"
                         onSuccess={responseGoogle}
                         onFailure={responseErrorGoogle}
                         cookiePolicy={'single_host_origin'}
                     />
-                    <div className="social-link facebook center-align">
+                    {/* <div className="social-link facebook center-align">
                         <NavLink to="/#" style={{display:"flex",justifyContent:"space-around"}}><i className="fa fa-facebook fa-2x"></i><span>Login with Facebook</span></NavLink>
-                    </div>
+                    </div> */}
                     {/* <div className="social-link twitter center-align">
                         <NavLink className="" to="/#"><i className="fa fa-twitter fa-2x"></i><span>Login with Twitter</span></NavLink>
                     </div> */}

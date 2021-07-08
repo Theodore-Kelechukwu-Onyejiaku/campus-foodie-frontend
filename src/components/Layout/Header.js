@@ -28,17 +28,17 @@ export default function Header({ cartLength, auth, logoutUser}) {
                 <NavLink activeClassName="active-link" to="/cart-list"><i className="material-icons left">shopping_cart</i>{cartLength}</NavLink>
               </li>
               <li><NavLink activeClassName="active-link" to="/about"><i className="material-icons white-text left">info</i>About?</NavLink></li>
-               <li><Link to="#" class="dropdown-trigger" data-target="dropdown2"><i class="material-icons left">account_circle</i>User<i class="material-icons right">arrow_drop_down</i></Link></li>
+               <li><Link to="#" className="dropdown-trigger" data-target="dropdown2"><i className="material-icons left">account_circle</i>User<i className="material-icons right">arrow_drop_down</i></Link></li>
             </ul>
-            {auth.user.email ?  <ul id="dropdown2" class="dropdown-content">
-                  <li><Link to="/profile" ><i class="material-icons left">account_circle</i>Profile</Link></li>
+            {auth.user.email ?  <ul id="dropdown2" className="dropdown-content">
+                  <li><Link to="/profile" ><i className="material-icons left">account_circle</i>Profile</Link></li>
                   <li><Link to="/orders"><i className="material-icons left">check_box</i>Orders</Link></li>
-                  <li><Link to="/notifications"><i class="material-icons left">add_alert</i>Alerts</Link></li>
+                  <li><Link to="/notifications"><i className="material-icons left">add_alert</i>Alerts</Link></li>
                   <li><Link to="/login" onClick={()=>{logoutUser()}}><i className="fa fa-sign-out"></i>Logout</Link></li>
-                  <li class="divider"></li>
+                  <li className="divider"></li>
                 </ul>
             :
-            <ul id="dropdown2" class="dropdown-content">
+            <ul id="dropdown2" className="dropdown-content">
                     <li><NavLink to="/login" className="side-link"><i className="fa fa-sign-in"></i>Login</NavLink></li>
           </ul>
           }
@@ -64,17 +64,17 @@ export default function Header({ cartLength, auth, logoutUser}) {
           <NavLink to="/cart-list" className="side-link"><i className="material-icons white-text left">shopping_cart</i>{cartLength}</NavLink>
         </li>
         <li><NavLink to="#" className="side-link"><i className="material-icons white-text left">info</i>About?</NavLink></li>
-        <li><NavLink to="#" className="side-link dropdown-trigger" data-target="dropdown1"><i class="material-icons left white-text">account_circle</i>User<i class="material-icons right white-text">arrow_drop_down</i></NavLink></li>
+        <li><NavLink to="#" className="side-link dropdown-trigger" data-target="dropdown1"><i className="material-icons left white-text">account_circle</i>User<i className="material-icons right white-text">arrow_drop_down</i></NavLink></li>
       </ul>
-      {auth.user.email ?  <ul id="dropdown1" class="dropdown-content">
-                  <li><Link to="/profile" ><i class="material-icons left">account_circle</i>Profile</Link></li>
+      {auth.user.email ?  <ul id="dropdown1" className="dropdown-content">
+                  <li><Link to="/profile" ><i className="material-icons left">account_circle</i>Profile</Link></li>
                   <li><Link to="/orders"><i className="material-icons left">check_box</i>Orders</Link></li>
-                  <li><Link to="/notifications"><i class="material-icons left">add_alert</i>Alerts</Link></li>
+                  <li><Link to="/notifications"><i className="material-icons left">add_alert</i>Alerts</Link></li>
                   <li><Link to="/login" onClick={()=>{logoutUser()}}><i className="fa fa-sign-out"></i>Logout</Link></li>
-                  <li class="divider"></li>
+                  <li className="divider"></li>
                 </ul>
             :
-            <ul id="dropdown1" class="dropdown-content">
+            <ul id="dropdown1" className="dropdown-content">
                 <li><NavLink to="/login" ><i className="fa fa-sign-in"></i>Login</NavLink></li>
           </ul>
       }
