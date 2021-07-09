@@ -13,7 +13,6 @@ export default function FoodList({ dishes, addItem }) {
     const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     const filteration = (e) => {
-
         let filter = []
         
         dishes.forEach((eachDish, index, dishes)=>{
