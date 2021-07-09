@@ -1,12 +1,12 @@
-import React,{useState, useEffect} from 'react';
-import { baseUrl } from "../../shared/baseUrl";
+import React,{useState} from 'react';
+// import { baseUrl } from "../../shared/baseUrl";
 
 
 import SingleUser from "../Admin/SingleUser";
 
 
 const Profile = (auth) =>{
-        const [user, setUser] = useState(auth.user)
+        const [user] = useState(auth.user)
 
         return(
             <div>

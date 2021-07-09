@@ -96,10 +96,10 @@ const Account = () =>{
 }
 
 const Dropdown = ({titleSetter}) =>{
-    const [isOpen, setIsOpen] = useState(true)
-    const hideOrShow = () =>{
-            setIsOpen(!isOpen)
-    }
+    const [isOpen] = useState(true)
+    // const hideOrShow = () =>{
+    //         setIsOpen(!isOpen)
+    // }
     return(
         <>
             {/* <button className="btn" onClick={()=>{hideOrShow()}}>
