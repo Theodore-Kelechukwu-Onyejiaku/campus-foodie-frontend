@@ -1,9 +1,22 @@
-import React from "react"
+import React,{useState} from "react"
 import { Fade, Stagger } from "react-animation-components";
-import naira from "../../images/naira.png"
+import naira from "../../images/naira.png";
+
+import Checkout from "../Layout/Modals/CheckoutModal";
 
 
 export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, deleteItemFromCart }) {
+
+    const [isModalOpen , setIsModalOpen] = useState(false)
+    
+    const openModal = () => {
+        setIsModalOpen(!isModalOpen);
+    }
+    const closeModal = ()=>{
+        setIsModalOpen(!isModalOpen);
+    }
+
+
     const GetTotalCart = ({cart}) =>{
         let sum = 0;
         cart.forEach(item =>{
@@ -15,6 +28,12 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
     }
     return (
         <div className="container">
+            {
+                isModalOpen ? <Checkout cartItems={cart} closeModal={closeModal} openModal={openModal}/>
+                :
+                <div></div>
+            }
+            
             {cart.length ?
                 <div className="container row">
                     <div className="col s12 m8">
@@ -25,9 +44,9 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
                                         <div className="card-panel grey lighten-5 z-depth-1">
                                             <div className="row valign-wrapper">
                                                 <div className="col s6">
-                                                    <img src={cart.dishUrl} alt="dish" className="responsive-img" />
+                                                    <img src={cart.dishUrl} alt="dish" className="responsive-img circle" />
                                                 </div>
-                                                <div className="col s10">
+                                                <div className="col s6">
                                                     <div className="left"><h5 style={{ fontFamily: "'Tangerine', cursive" }}>{cart.name}</h5></div>
                                                     <div className="right"><h5 style={{ fontFamily: "'Tangerine', cursive" }}><img src={naira} alt="currency"/>{cart.price}</h5></div>
                                                     <br />
@@ -55,8 +74,11 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
                             )}
                         </Stagger>
                     </div>
-                    <div className="col s12 m2">
+                    <div className="col s12 m4">
                         <GetTotalCart cart={cart}/>
+                        <button className="btn" onClick={()=>{openModal()}}>
+                            Checkout<i className="material-icons right">shopping_cart</i>
+                        </button>
                     </div>
                 </div>
                 : <div>No Cart Item!</div>

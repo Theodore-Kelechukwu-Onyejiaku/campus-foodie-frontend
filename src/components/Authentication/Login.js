@@ -3,22 +3,31 @@ import { NavLink, useHistory} from "react-router-dom";
 import { GoogleLogin } from "react-google-login"
 import {baseUrl} from "../../shared/baseUrl";
 import Loader from "../Layout/Loader";
+import M from 'materialize-css/dist/js/materialize.min.js'
 
 
 
 
-export default function Login({ signupGoogle, signupGoogleError, auth, signupGoogleLoading, signupLocalPost,loginLocalPost }) {
+
+export default function Login({ signupGoogle, signupGoogleError, auth, signupGoogleLoading,loginLocalPost }) {
     const [visible, setVisible] = useState(false);
     const [passwordValue, setPasswordValue] = useState("");
     const [emailValue, setEmailValue] = useState("");
+    const [invalidEmail, setInvalidEmail] = useState(false);
+    const [noEmailInput, setNoEmailInput] = useState(false);
+    const [noPasswordInput, setNoPasswordInput] = useState(false);
+
     const history = useHistory();
 
     const handlePasswordInput = (e) =>{
         setPasswordValue(e.target.value);
+        setNoPasswordInput(false)
     }
 
     const handleEmailInput = (e) =>{
-        setEmailValue(e.target.value)
+        setEmailValue(e.target.value);
+        setNoEmailInput(false);
+        setInvalidEmail(false);
     }
     const handleVisibility = () => {
         setVisible(!visible);
@@ -28,6 +37,32 @@ export default function Login({ signupGoogle, signupGoogleError, auth, signupGoo
         e.preventDefault();
         let signupBody = {email:emailValue, password: passwordValue};
         console.log(signupBody)
+
+        if(emailValue === "" && passwordValue === ""){
+            setNoEmailInput(true);
+            setNoPasswordInput(true);
+            M.toast({ html: "Please enter all fields", classes: "red white-text" })
+            return;
+        }
+         if(emailValue === ""){
+            // Tell the user
+            setNoEmailInput(true);
+            M.toast({ html: "Please enter an email address", classes: "red white-text" })
+            return;
+        }
+        if(passwordValue === ""){
+            setNoPasswordInput(true);
+            M.toast({ html: "Please enter password", classes: "red white-text" })
+            return
+        }
+        let isEmailValid = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(emailValue);
+        if(!isEmailValid) {
+            // Tell the user
+            console.log("email invalid!")
+            setInvalidEmail(!invalidEmail)
+            M.toast({ html: "Please enter a valid email address", classes: "red white-text" })
+            return
+        }
         loginLocalPost(signupBody)
     }
     const responseGoogle = async (googleData) => {
@@ -83,36 +118,38 @@ export default function Login({ signupGoogle, signupGoogleError, auth, signupGoo
                 {auth.isLoading ? <Loader /> : <div></div>}
                 {/* Custom alert */}
                 {auth.errorMess ? 
-                    <div class="alert-danger">
-                        <span class="closebtn" onClick={()=>{document.querySelector(".alert-danger").style.display='none'}}>&times;</span>
+                    <div class="red-text center-align">
                         {auth.errorMess}
                     </div>
                 : <div></div>}
                 {auth.successMess ? 
-                    <div class="alert-success">
-                        <span class="closebtn" onClick={()=>{document.querySelector(".alert-success").style.display='none'}}>&times;</span>
+                 <div class="green-text center-align">
                         {auth.successMess}
-                        
-                    </div>
+                 </div>
                 : <div></div>}
                 {/* end of custom alert */}
                     <form className="" onSubmit={(e)=>{handleSubmit(e)}}>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Login</h4>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="icon_prefix" type="email" className="validate" onChange={(e)=>{handleEmailInput(e)}} required/>
+                                <input id="icon_prefix" type="text"  value={emailValue} className="validate" onChange={(e)=>{handleEmailInput(e)}}/>
                                 <label htmlFor="icon_prefix">Email</label>
+                                {invalidEmail ?<span className="red-text">Please enter a valid email address</span> : <span></span>}
+                                <br/>
+                                {noEmailInput? <span className="red-text">Please fill this field</span>: <span></span>}
                             </div>
                             {visible ? <div className="input-field col s12">
-                                <input id="icon_telephone" type="text" className="validate" onChange={(e)=>{handlePasswordInput(e)}}/>
+                                <input id="icon_telephone" type="text" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}}/>
                                 <label for="icon_telephone">Password</label>
-                                <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password" onChange={(e)=>{handlePasswordInput(e)}} required>
+                                {noPasswordInput? <span className="red-text">Please fill this field</span>: <span></span>}
+                                <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password" onChange={(e)=>{handlePasswordInput(e)}}>
                                     <span className="material-icons">visibility</span>
                                 </span>
                             </div> :
                                 <div className="input-field col s12">
-                                    <input id="icon_telephone" type="password" className="validate" onChange={(e)=>{handlePasswordInput(e)}}/>
+                                    <input id="icon_telephone" type="password" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}}/>
                                     <label for="icon_telephone">Password</label>
+                                    {noPasswordInput? <span className="red-text">Please fill this field</span>: <span></span>}
                                     <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                         <span className="material-icons">visibility_off</span>
                                     </span>

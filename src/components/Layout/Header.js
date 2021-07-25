@@ -3,6 +3,7 @@ import { NavLink, Link } from "react-router-dom"
 
 
 export default function Header({ cartLength, auth, logoutUser}) {
+  console.log(auth.user);
   return (
   <>
     <div>
@@ -30,10 +31,13 @@ export default function Header({ cartLength, auth, logoutUser}) {
               <li><NavLink activeClassName="active-link" to="/about"><i className="material-icons white-text left">info</i>About?</NavLink></li>
                <li><Link to="#" className="dropdown-trigger" data-target="dropdown2"><i className="material-icons left">account_circle</i>User<i className="material-icons right">arrow_drop_down</i></Link></li>
             </ul>
-            {auth.user.email ?  <ul id="dropdown2" className="dropdown-content">
+            {auth.user.email ?  <ul id="dropdown2" className="dropdown-content" width="400px">
                   <li><Link to="/profile" ><i className="material-icons left">account_circle</i>Profile</Link></li>
                   <li><Link to="/orders"><i className="material-icons left">check_box</i>Orders</Link></li>
                   <li><Link to="/notifications"><i className="material-icons left">add_alert</i>Alerts</Link></li>
+                  {auth.user.isAdmin ? <li><Link to="/admin/dashboard"><i className="material-icons left">settings</i>Admin</Link></li>
+                    : <li></li>
+                  }
                   <li><Link to="/login" onClick={()=>{logoutUser()}}><i className="fa fa-sign-out"></i>Logout</Link></li>
                   <li className="divider"></li>
                 </ul>
@@ -71,6 +75,9 @@ export default function Header({ cartLength, auth, logoutUser}) {
                   <li><Link to="/orders"><i className="material-icons left">check_box</i>Orders</Link></li>
                   <li><Link to="/notifications"><i className="material-icons left">add_alert</i>Alerts</Link></li>
                   <li><Link to="/login" onClick={()=>{logoutUser()}}><i className="fa fa-sign-out"></i>Logout</Link></li>
+                  {auth.user.isAdmin ? <li><Link to="/admin/dashboard"><i className="material-icons left">settings</i>Admin Dashboard</Link></li>
+                    : <li></li>
+                  }
                   <li className="divider"></li>
                 </ul>
             :

@@ -1,6 +1,8 @@
 import * as ActionTypes from "../ActionTypes";
 import { baseUrl } from "../../shared/baseUrl";
 import history from "../history";
+import M from 'materialize-css/dist/js/materialize.min.js'
+
 
 
 export const logout = () =>({
@@ -11,6 +13,7 @@ export const logoutUser = () => dispatch =>{
     localStorage.setItem("token", "");
     history.push("/login");
      dispatch(logout())
+     M.toast({ html: "You are logged out successfully!", classes: "green white-text" })
 }
 
 export const signupGoogle = (userData, token, successMess) =>({
@@ -92,15 +95,19 @@ export const signupLocalPost = (formData) => dispatch =>{
         if(result.token){
             localStorage.setItem("token",result.token);
             await dispatch(signupLocal(result.user, result.token, result.message))
+            M.toast({ html: result.message, classes: "green white-text" })
+
             setTimeout(()=>{
                 history.push("/account-activation")
             }, 1500)
         }else{
             dispatch(signupLocalError(result.message));
+            M.toast({ html: result.message, classes: "red white-text" })
         }
     })
     .catch(error =>{
         dispatch(signupLocalError(error.message));
+        M.toast({ html: error.message, classes: "red white-text" })
     })
 }
 
@@ -120,12 +127,16 @@ export const loginLocalPost = (formData) => dispatch =>{
             if(result.user.isAdmin){
                 localStorage.setItem("token",result.token);
                 await dispatch(signupLocal(result.user, result.token, result.message))
+                M.toast({ html: result.message, classes: "green white-text" })
+
                 setTimeout(()=>{
                     history.push("/admin/dashboard");
                 }, 1500) 
             }else{
                 localStorage.setItem("token",result.token);
                 await dispatch(signupLocal(result.user, result.token, result.message))
+                M.toast({ html: result.message, classes: "green white-text" })
+
                 setTimeout(()=>{
                     history.push("/profile");
                 }, 1500) 
@@ -133,9 +144,11 @@ export const loginLocalPost = (formData) => dispatch =>{
               
         }else{
             dispatch(signupLocalError(result.message));
+            M.toast({ html: result.message, classes: "red white-text" })
         }
     })
     .catch(error =>{
         dispatch(signupLocalError(error.message));
+        M.toast({ html: error.message, classes: "red white-text" })
     })
 }

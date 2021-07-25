@@ -36,25 +36,21 @@ const Profile = ({details}) =>{
             </div>
           </div>
           <div className="row">
-              <div className="col s12 m6 l4">
-                    <hr/>
-                    <span className="black-text">
-                        Email :{details.email}
-                    </span><br/>
-                    <span>
-                        <span className="">Username:</span> {details.username}
-                    </span><br/>
-                    <span>
-                        Mobile Number: {details.phone}
-                    </span>
-                    <hr/>
-
-              </div>
-              <div className="col s12 m6 l8">
-                    Address<i className="fa fa-map"></i><br/>
-                    <p>
-                        This is my address: Dotcom villa Eziobodo.
+              <div className="col s12 m12 l12">
+                    <p className="black-text">
+                        Email :{details.email || "none"}
                     </p>
+                    <p>
+                        <p className="">Username:</p> {details.username || "none"}
+                    </p>
+                    <p>
+                        Mobile Number: {details.phone || "none"}
+                    </p>
+                    
+                    <p>
+                        Address:This is my address: Dotcom villa Eziobodo.
+                    </p>
+
               </div>
             </div>
         </div>
@@ -164,12 +160,13 @@ const SingleUser = () =>{
     return(
         <div className="container">
             <AdminTools/>
-            <div className="row" style={{margin:"5% auto"}}>
+            <div className="row" style={{margin:"3% auto"}}>
                 <div className="col s12 m4">
                     <Dropdown titleSetter={titleSetter}/>
                 </div>
+                {title.toLocaleUpperCase()}
                 <div className="col s12 m8" style={{margin:"10% auto"}}>
-                    {title.toLocaleUpperCase()}
+                    
                     <Display user={user} title={title}/>
                 </div>
             </div>

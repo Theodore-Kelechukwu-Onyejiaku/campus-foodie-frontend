@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { NavLink, useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import Loader from "../Layout/Loader";
-import {baseUrl} from "../../shared/baseUrl";
+import { baseUrl } from "../../shared/baseUrl";
 import M from 'materialize-css/dist/js/materialize.min.js'
 
 
@@ -16,22 +16,22 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
     const history = useHistory();
 
 
-    const handlePasswordInput = (e) =>{
+    const handlePasswordInput = (e) => {
         setPasswordValue(e.target.value);
         setPasswordLength(e.target.value.length);
-        if(passwordLength < 6){
-            if(passwordLength === 1){
-                M.toast({ html: "Password should be greater than 6", classes:"red white-text" })
+        if (passwordLength < 6) {
+            if (passwordLength === 1) {
+                M.toast({ html: "Password should be greater than 6", classes: "red white-text" })
             }
             setPasswordError("Password should be greater than 6");
             setDisable(true);
-        }else{
+        } else {
             setPasswordError("");
             setDisable(false);
         }
     }
 
-    const handleEmailInput = (e) =>{
+    const handleEmailInput = (e) => {
         setEmailValue(e.target.value)
     }
 
@@ -39,9 +39,9 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
         setVisible(!visible);
     }
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = (e) => {
         e.preventDefault();
-        let signupBody = {email:emailValue, password: passwordValue};
+        let signupBody = { email: emailValue, password: passwordValue };
         console.log(signupBody)
         signupLocalPost(signupBody)
     }
@@ -49,7 +49,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
     const responseGoogle = async (googleData) => {
         signupGoogleLoading()
         console.log(googleData)
-        const res = await fetch(baseUrl+"api/auth/google", {
+        const res = await fetch(baseUrl + "api/auth/google", {
             method: "POST",
             body: JSON.stringify({
                 token: googleData.tokenId
@@ -65,7 +65,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     // Successful
                     localStorage.setItem("token", data.token);
                     await signupGoogle(data.user, data.token, data.message)
-                    setTimeout(()=>{
+                    setTimeout(() => {
                         history.push("/profile")
                     }, 1500)
                 }
@@ -81,7 +81,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
         console.log(res)
     }
 
-    const responseErrorGoogle = (error) =>{
+    const responseErrorGoogle = (error) => {
         console.log(error);
     }
 
@@ -92,42 +92,39 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                 <div className="row">
                     {auth.isLoading ? <Loader /> : <div></div>}
                     {/* Custom alert */}
-                {auth.errorMess ? 
-                    <div class="alert-danger">
-                        <span class="closebtn" onClick={()=>{document.querySelector(".alert-danger").style.display='none'}}>&times;</span>
-                        {auth.errorMess}
-                    </div>
-                : <div></div>}
-                {auth.successMess ? 
-                    <div class="alert-success">
-                        <span class="closebtn" onClick={()=>{document.querySelector(".alert-success").style.display='none'}}>&times;</span>
-                        {auth.successMess}
-                        
-                    </div>
-                : <div></div>}
-                {/* end of custom alert */}
-                    <form  onSubmit={(e)=>{handleSubmit(e)}}>
+                    {auth.errorMess ?
+                        <div class="red-text center-align">
+                            {auth.errorMess}
+                        </div>
+                        : <div></div>}
+                    {auth.successMess ?
+                        <div class="green-text center-align">
+                            {auth.successMess}
+                        </div>
+                        : <div></div>}
+                    {/* end of custom alert */}
+                    <form onSubmit={(e) => { handleSubmit(e) }}>
                         <h4 className="center-align" style={{ fontFamily: "'Tangerine', cursive" }}>Please Create an Account!</h4>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input id="icon_prefix" type="email" onChange={(e)=>{handleEmailInput(e)}} className="validate" value={emailValue} required/>
+                                <input id="icon_prefix" type="email" onChange={(e) => { handleEmailInput(e) }} className="validate" value={emailValue} required />
                                 <label htmlFor="icon_prefix">Email</label>
                             </div>
                             {visible ? <div className="input-field col s12">
-                                <input id="icon_telephone" type="text" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}} required/>
+                                <input id="icon_telephone" type="text" className="validate" value={passwordValue} onChange={(e) => { handlePasswordInput(e) }} required />
                                 <label for="icon_telephone">Password</label>
-                                <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
+                                <span onClick={() => handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                     <span className="material-icons" id="see">visibility</span>
                                 </span>
-                                <br/><span className="red-text">{passwordError}</span>
+                                <br /><span className="red-text">{passwordError}</span>
                             </div> :
                                 <div className="input-field col s12">
-                                    <input id="icon_telephone" type="password" className="validate" value={passwordValue} onChange={(e)=>{handlePasswordInput(e)}} required/>
+                                    <input id="icon_telephone" type="password" className="validate" value={passwordValue} onChange={(e) => { handlePasswordInput(e) }} required />
                                     <label for="icon_telephone">Password</label>
-                                    <span onClick={()=>handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
+                                    <span onClick={() => handleVisibility()} toggle="#confirm-password" className="field-icon toggle-password">
                                         <span className="material-icons" id="see">visibility_off</span>
                                     </span>
-                                <br/><span className="red-text">{passwordError}</span>
+                                    <br /><span className="red-text">{passwordError}</span>
                                 </div>
                             }
                             <button type="submit" className="btn" disabled={disable} >Create Account</button>
@@ -141,9 +138,9 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     <GoogleLogin
                         clientId="1036410801170-q9bp27gfbqm9u9id57h29muvbr9s18rt.apps.googleusercontent.com"
                         render={renderProps => (
-                            <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="social-link google" style={{borderRadius:"3px",fontSize:"20px", boxShadow: "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%)"}}>
-                                <i  style={{padding:"4%", border: "thin solid white", float:"left"}} className="fa fa-google"></i>
-                                <span style={{padding:"4%", float:"left"}}>Signup with Google</span>
+                            <button onClick={renderProps.onClick} disabled={renderProps.disabled} className="social-link google" style={{ borderRadius: "3px", fontSize: "20px", boxShadow: "0 2px 2px 0 rgb(0 0 0 / 14%), 0 3px 1px -2px rgb(0 0 0 / 12%), 0 1px 5px 0 rgb(0 0 0 / 20%)" }}>
+                                <i style={{ padding: "4%", border: "thin solid white", float: "left" }} className="fa fa-google"></i>
+                                <span style={{ padding: "4%", float: "left" }}>Signup with Google</span>
                             </button>
                         )}
                         buttonText="Login"

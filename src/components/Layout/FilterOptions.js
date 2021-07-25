@@ -4,9 +4,9 @@ const FilterOptions = ({filteration}) =>{
     return (
         <form name="filter">
                     {/* MEAL TIME CATEGORY START */}
-                    <div className="col s4 m6 l6">
+                    <div className="col s6 m6 l6">
 
-                        <strong style={{ fontFamily: "serif" }}>Meal Time</strong>
+                        <h6 style={{ fontFamily: "serif" }}>Meal Time</h6>
                         <p>
                             <label>
                                 <input name="filter" type="radio" value="breakfast" onChange={(e) => { filteration(e) }} />
@@ -37,7 +37,7 @@ const FilterOptions = ({filteration}) =>{
 
                     {/* SOUP CATEGORY START */}
                     <div className="col s6 m6 l6">
-                        <strong style={{ fontFamily: "serif" }}>Local Dishes</strong>
+                        <h6 style={{ fontFamily: "serif" }}>Local Dishes</h6>
                         <p>
                             <label>
                                 <input name="filter" type="radio" value="soup" onChange={(e) => { filteration(e) }} />

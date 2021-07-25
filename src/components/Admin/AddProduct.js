@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import AdminToolFix from "../Layout/AdminToolFix"
+import AdminTools from "../Layout/AdminTools";
+import AdminToolFix from "../Layout/AdminToolFix";
 
 import M from 'materialize-css/dist/js/materialize.min.js'
 
@@ -83,9 +84,9 @@ const AddProduct = ({ dish, postDish }) => {
 
     return (
         <div className="container">
-            {/* <AdminTools /> */}
-            {successReport ? <div className="green white-text center-align successMessage">{successReport}</div>: <div></div>}
-            {errorReport ? <div className="red white-text center-align errorMessage">{errorReport}</div>: <div></div>}
+            <AdminTools />
+            {successReport ? <div className="green-text center-align">{successReport}</div>: <div></div>}
+            {errorReport ? <div className="red-text center-align">{errorReport}</div>: <div></div>}
             {loading &&<div className="center-align"><div className="preloader-wrapper big active">
                     <div className="spinner-layer spinner-blue-only">
                         <div className="circle-clipper left">

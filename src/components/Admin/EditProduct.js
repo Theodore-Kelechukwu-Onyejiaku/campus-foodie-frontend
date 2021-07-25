@@ -10,13 +10,11 @@ export default function EditProduct(){
     // const [success, setSuccess] = useState("");
     // const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false)
-    
     const [dish, setDish] = useState({ name: "", price: "", description: "", categories: "" });
     
-    
     const handleInput = (e, name) => {
-        let value = e.target.value.replace(/\s+/g, '').split(",")
-        console.log(dish)
+        let value = e.target.value
+        
         setDish(Object.assign({}, dish, {[name]: value}));
     }
 
@@ -26,7 +24,8 @@ export default function EditProduct(){
         console.log("hello")
         const token = localStorage.getItem("token");
         const id = window.location.pathname.split("/")[window.location.pathname.split("/").length - 2];
-
+        console.log(dish.categories)
+        dish.categories = dish.categories.replace(/\s+/g, '').split(",");
         fetch(baseUrl + "api/admin/products/"+id, {
             method: "PUT",
             body: JSON.stringify(dish),
@@ -45,6 +44,7 @@ export default function EditProduct(){
                 }
             })
             .then(async (result) => {
+                console.log(result);
                 setIsLoading(isLoading);
                 M.toast({ html: "Product updated successfully!", classes:"green white-text" })
             })
@@ -83,7 +83,7 @@ export default function EditProduct(){
                   return  console.log(result.message)
                 }
                 setDish(Object.assign({}, dish, result.product))
-                console.log("The products:", result.product.description)
+                console.log("The categories:", result.product.categories)
                 return 
             })
             .catch(error => {

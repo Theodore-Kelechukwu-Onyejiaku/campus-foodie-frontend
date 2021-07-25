@@ -29,6 +29,7 @@ import AllProducts from "./Admin/AllProducts";
 import EditProduct from "./Admin/EditProduct";
 import SingleUser from "./Admin/SingleUser";
 import AdminTools from "./Layout/AdminTools"
+import AdminToolFix from "./Layout/AdminToolFix"
 
 const mapStateToProps = (state) => {
     return {
@@ -95,7 +96,7 @@ const Main = (props) => {
                 {/* </CSSTransition> */}
             </TransitionGroup>
             {
-                props.auth.user.isAdmin && (<div className="hide-on-med-and-up"><AdminTools /></div>)
+                props.auth.user.isAdmin && (<div className="hide-on-med-and-up"><AdminTools /> <AdminToolFix/></div>)
             }
             <Footer />
         </div>

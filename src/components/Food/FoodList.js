@@ -102,8 +102,9 @@ export default function FoodList({ dishes, addItem }) {
                             }
                         Filter</button>
                         <button onClick={() => { clearFilteration() }} className="btn  waves-light red">Clear Filter<i className="material-icons left">clear</i></button>
+                        
                         {isFilterOpen ? <FilterOptions filteration={filteration}/>
-                            : <div>Filter is not open </div>
+                            : <div></div>
                         }
                     </div>
                     
