@@ -28,7 +28,7 @@ const CheckoutModal = ({ cartItems, closeModal}) => {
       <div className="delete-modal">
         <div class="modal-header">
           <span class="close" onClick={()=>{closeModal()}} >&times;</span>
-          <h4 className="modal-warning">Proceed to Checkout</h4>
+          <h4 className="modal-success">Proceed to Checkout</h4>
         </div>
         <table>
             <thead>
