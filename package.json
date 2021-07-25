@@ -10,6 +10,7 @@
     "bootstrap": "^4.4.1",
     "bootstrap-social": "^5.1.1",
     "cross-fetch": "^3.0.6",
+    "flutterwave-react-v3": "^1.0.10",
     "font-awesome": "^4.7.0",
     "material-design-icons": "^3.0.1",
     "materialize-css": "^1.0.0-rc.2",
