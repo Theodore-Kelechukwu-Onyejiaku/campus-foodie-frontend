@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { TransitionGroup } from "react-transition-group";
 
 
+
 import { postDish, getAllDishes } from "../redux/ActionCreators/dishActionCreator";
 import { addItem, increaseItemInCart, decreaseItemInCart, deleteItemFromCart} from "../redux/ActionCreators/cartActionCreator"
 import {signupGoogleError,signupGoogle,signupGoogleLoading,signupLocalPost, checkIsLoggedIn, logoutUser, loginLocalPost} from "../redux/ActionCreators/authActionCreator";
@@ -69,7 +70,7 @@ const Main = (props) => {
                     <div >
                         <Switch>
                             <Route path="/" component={() => <Home dish={props.dish} addItem={props.addItem} />} exact />
-                            <Route path="/cart-list" component={() => <CartList cart={props.cart.cart} increaseItemInCart={props.increaseItemInCart} 
+                            <Route path="/cart-list" component={() => <CartList user={props.auth.user} cart={props.cart.cart} increaseItemInCart={props.increaseItemInCart} 
                                                                                 decreaseItemInCart={props.decreaseItemInCart} 
                                                                                 deleteItemFromCart={props.deleteItemFromCart}
                                                                                 />} exact />

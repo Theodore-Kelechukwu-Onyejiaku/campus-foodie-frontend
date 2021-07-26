@@ -38,17 +38,16 @@ const Profile = ({details}) =>{
           <div className="row">
               <div className="col s12 m12 l12">
                     <p className="black-text">
-                        Email :{details.email || "none"}
+                        <span className="green-text">Email:</span> {details.email || "none"}
                     </p>
                     <p>
-                        <p className="">Username:</p> {details.username || "none"}
+                        <span className="green-text">Username:</span> {details.fullname || "none"}
                     </p>
                     <p>
-                        Mobile Number: {details.phone || "none"}
+                        <span className="green-text">Mobile Number:</span> {details.phone || "none"}
                     </p>
-                    
                     <p>
-                        Address:This is my address: Dotcom villa Eziobodo.
+                        <span className="green-text">Address:</span> {details.address || "none"}
                     </p>
 
               </div>

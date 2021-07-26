@@ -13,6 +13,8 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
     const [passwordError, setPasswordError] = useState("");
     const [disable, setDisable] = useState(false);
     const [passwordLength, setPasswordLength] = useState(0);
+    const [fullNameValue, setFullNameValue] = useState("");
+    const [fullNameError, setFullNameError] = useState("");
     const history = useHistory();
 
 
@@ -35,13 +37,28 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
         setEmailValue(e.target.value)
     }
 
+    const handleFullNameInput = (e) =>{
+        setFullNameError("");
+        setFullNameValue(e.target.value);
+    }
+
     const handleVisibility = () => {
         setVisible(!visible);
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let signupBody = { email: emailValue, password: passwordValue };
+        if(fullNameValue === ""){
+            setFullNameError("Please enter your full name");
+            M.toast({ html: "Enter full name", classes: "red white-text" })
+            return;
+        }
+        if(fullNameValue.split(" ").length <= 1){
+            setFullNameError("Please enter correct full name");
+            M.toast({ html: "Enter Correct full name", classes: "red white-text" })
+            return;
+        }
+        let signupBody = { email: emailValue, password: passwordValue, fullname: fullNameValue };
         console.log(signupBody)
         signupLocalPost(signupBody)
     }
@@ -110,6 +127,11 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                                 <input id="icon_prefix" type="email" onChange={(e) => { handleEmailInput(e) }} className="validate" value={emailValue} required />
                                 <label htmlFor="icon_prefix">Email</label>
                             </div>
+                            <div className="input-field col s12">
+                                <input id="icon_prefix" type="text" onChange={(e) => { handleFullNameInput(e) }} className="validate" value={fullNameValue}/>
+                                <label htmlFor="icon_prefix">Full Name</label>
+                                <br /><span className="red-text">{fullNameError}</span>
+                            </div>
                             {visible ? <div className="input-field col s12">
                                 <input id="icon_telephone" type="text" className="validate" value={passwordValue} onChange={(e) => { handlePasswordInput(e) }} required />
                                 <label for="icon_telephone">Password</label>
@@ -127,7 +149,11 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                                     <br /><span className="red-text">{passwordError}</span>
                                 </div>
                             }
+                            {auth.isLoading ? <button type="submit" className="btn" disabled>Creating{" "}<i className="fa fa-spinner fa-spin"></i></button>
+                            
+                            : 
                             <button type="submit" className="btn" disabled={disable} >Create Account</button>
+                            }
                         </div>
                     </form>
                     <div className="right-align">

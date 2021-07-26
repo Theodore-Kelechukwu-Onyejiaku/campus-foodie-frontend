@@ -5,7 +5,7 @@ import naira from "../../images/naira.png";
 import Checkout from "../Layout/Modals/CheckoutModal";
 
 
-export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, deleteItemFromCart }) {
+export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, deleteItemFromCart, user }) {
 
     const [isModalOpen , setIsModalOpen] = useState(false)
     
@@ -27,9 +27,9 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
         )
     }
     return (
-        <div className="container">
+        <div>
             {
-                isModalOpen ? <Checkout cartItems={cart} closeModal={closeModal} openModal={openModal}/>
+                isModalOpen ? <Checkout cartItems={cart} closeModal={closeModal} openModal={openModal} user={user}/>
                 :
                 <div></div>
             }
@@ -76,6 +76,7 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
                     </div>
                     <div className="col s12 m4">
                         <GetTotalCart cart={cart}/>
+                        <p></p>
                         <button className="btn" onClick={()=>{openModal()}}>
                             Checkout<i className="material-icons right">shopping_cart</i>
                         </button>

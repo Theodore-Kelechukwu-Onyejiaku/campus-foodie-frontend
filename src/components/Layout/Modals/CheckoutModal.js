@@ -1,9 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import naira from "../../../images/naira.png";
+import {useHistory} from "react-router-dom"
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
+import {NavLink} from "react-router-dom"
+import M from 'materialize-css/dist/js/materialize.min.js'
 
 
-const CheckoutModal = ({ cartItems, closeModal }) => {
+
+const CheckoutModal = ({ cartItems, closeModal, user}) => {
+  console.log(user);
+  const history = useHistory();
+  const [flutterWaveLoading, setFlutterWaveLoading] = useState(false);
   const config = {
     public_key: 'FLWPUBK_TEST-1da3e5cbecdc0376b40b2dbeed9e51be-X',
     tx_ref: Date.now(),
@@ -11,9 +18,9 @@ const CheckoutModal = ({ cartItems, closeModal }) => {
     currency: 'NGN',
     payment_options: 'card,mobilemoney,ussd',
     customer: {
-      email: 'theodore.oneyejiaku.g20@gmail.com',
-      phonenumber: '07064586146',
-      name: 'Theodore Kelechukwu Onyejiaku',
+      email: user.email,
+      phonenumber: user.phone,
+      name: user.fullname,
     },
     customizations: {
       title: 'Checkout Payment',
@@ -44,6 +51,17 @@ const CheckoutModal = ({ cartItems, closeModal }) => {
     return content;
   }
 
+  const flutterWaveCheckout = ()=>{
+      handleFlutterPayment({
+        callback: (response) => {
+          console.log(response);
+          closePaymentModal() // this will close the modal programmatically
+        },
+        onClose: () => {
+          setFlutterWaveLoading(false);
+        },
+      });
+  }
   return (
     <div className="my-modal">
       <div className="delete-modal">
@@ -78,15 +96,19 @@ const CheckoutModal = ({ cartItems, closeModal }) => {
             <a className="btn" href={"https://wa.me/+2349024833001/?text=Hi I would like to order:%0AName%09%09Total%0A" + whatsappCheckout()}>WHATSAPP<i className="fa fa-whatsapp"></i></a>
           </p>
           <p>
-            <button className="btn" onClick={() => {
-              handleFlutterPayment({
-                callback: (response) => {
-                  console.log(response);
-                  closePaymentModal() // this will close the modal programmatically
-                },
-                onClose: () => { },
-              });
-            }}>PAYMENT<i className="material-icons">payment</i></button>
+            {user.email && 
+            <button className="btn"  onClick={()=>{flutterWaveCheckout();setFlutterWaveLoading(true)}}>
+            {
+              flutterWaveLoading ? <span>Checking out <i class="fa fa-spinner fa-spin"></i></span>
+                : 
+                <span>Make Payment<i className="material-icons">payment</i></span>
+            }
+            </button>
+            }
+            {!user.email && <button onClick={()=>{M.toast({ html: "Please you must login to proceed", classes: "red white-text" }); history.push("/login")}} 
+              className="btn"> <span>PAYMENT<i className="material-icons">payment</i></span></button>
+            }
+            
           </p>
           <form>
 

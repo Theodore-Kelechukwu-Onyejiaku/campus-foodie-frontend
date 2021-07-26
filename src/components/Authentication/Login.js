@@ -155,7 +155,12 @@ export default function Login({ signupGoogle, signupGoogleError, auth, signupGoo
                                     </span>
                                 </div>
                             }
+                            {auth.isLoading ? <button type="submit" disabled className="btn">Logging in <i className="fa fa-spinner fa-spin"></i></button>
+                            
+                            : 
                             <button type="submit" className="btn">Login</button>
+                            }
+                            
                         </div>
                     </form>
                     <p></p>
