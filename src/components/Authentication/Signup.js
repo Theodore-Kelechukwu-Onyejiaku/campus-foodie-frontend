@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, useHistory, Link } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import Loader from "../Layout/Loader";
 import { baseUrl } from "../../shared/baseUrl";
@@ -181,6 +181,7 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
                     {/* <div className="social-link twitter center-align">
                         <NavLink className="" to="/#"><i className="fa fa-twitter fa-2x"></i><span>Signup with Twitter</span></NavLink>
                     </div> */}
+                    <Link to="/password-reset">Forgot Password?</Link>
 
                 </div>
             </div>

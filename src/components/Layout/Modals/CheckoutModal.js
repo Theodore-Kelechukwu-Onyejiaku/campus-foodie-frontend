@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import naira from "../../../images/naira.png";
 import {useHistory} from "react-router-dom"
 import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import {NavLink} from "react-router-dom"
 import M from 'materialize-css/dist/js/materialize.min.js'
 
 

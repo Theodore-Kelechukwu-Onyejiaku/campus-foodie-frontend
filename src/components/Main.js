@@ -31,6 +31,7 @@ import EditProduct from "./Admin/EditProduct";
 import SingleUser from "./Admin/SingleUser";
 import AdminTools from "./Layout/AdminTools"
 import AdminToolFix from "./Layout/AdminToolFix"
+import PasswordRecovery from "./Authentication/PasswordRecovery";
 
 const mapStateToProps = (state) => {
     return {
@@ -56,7 +57,10 @@ const mapDispatchToProps = (dispatch) => ({
     deleteItemFromCart: (item) => dispatch(deleteItemFromCart(item))
 })
 
+
+
 const Main = (props) => {
+    
     useEffect(() => {
         props.getAllDishes();
         props.checkIsLoggedIn();
@@ -80,7 +84,12 @@ const Main = (props) => {
                             <Route path="/about" component={About} />
                             <Route path="/profile" component={()=>props.auth.user.email ? <Profile auth={props.auth}/>: <PleaseLogin/>} />
                             <Route path="/account-activation" component={() => <AccountActivation auth={props.auth} />} />
+                            
+                            <Route path="/password-reset" component = {PasswordRecovery}/>
+
+
                             <Route path="/403" component={FourOThree} />
+
 
                             {/* FOR ADMIN */}
                             <Route path="/admin/dashboard" component={()=> props.auth.user.email ? <Dashboard />: <PleaseLogin/>} />

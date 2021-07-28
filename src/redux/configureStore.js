@@ -16,7 +16,8 @@ export const ConfigureStore = () =>{
        combineReducers({
            dish: dishReducer,
            cart: cartReducer,
-           auth: authReducer
+           auth: authReducer,
+           
        }),
        applyMiddleware(thunk, logger)
     );
