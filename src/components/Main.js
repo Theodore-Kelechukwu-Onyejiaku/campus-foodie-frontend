@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect} from "react";
 import { Switch, Route, Redirect, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { TransitionGroup } from "react-transition-group";
@@ -60,9 +60,9 @@ const mapDispatchToProps = (dispatch) => ({
 
 
 const Main = (props) => {
-    
     useEffect(() => {
         props.getAllDishes();
+        
         props.checkIsLoggedIn();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -73,7 +73,7 @@ const Main = (props) => {
                 {/* <CSSTransition key={props.location.key} classNames="page" timeout={300}> */}
                     <div >
                         <Switch>
-                            <Route path="/" component={() => <Home dish={props.dish} addItem={props.addItem} />} exact />
+                            <Route path="/" component={() => <Home dish={props.dish}  addItem={props.addItem} />} exact />
                             <Route path="/cart-list" component={() => <CartList user={props.auth.user} cart={props.cart.cart} increaseItemInCart={props.increaseItemInCart} 
                                                                                 decreaseItemInCart={props.decreaseItemInCart} 
                                                                                 deleteItemFromCart={props.deleteItemFromCart}
