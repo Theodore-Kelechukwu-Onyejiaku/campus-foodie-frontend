@@ -8,6 +8,7 @@ import Checkout from "../Layout/Modals/CheckoutModal";
 export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, deleteItemFromCart, user }) {
 
     const [isModalOpen , setIsModalOpen] = useState(false)
+    const [total, setTotal] = useState(0)
     
     const openModal = () => {
         setIsModalOpen(!isModalOpen);
@@ -22,6 +23,7 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
         cart.forEach(item =>{
             sum = sum + (Number(item.price) * Number(item.quantity))
         })
+        setTotal(sum)
         return (
             <span>Total: <img src={naira} alt="currency"/>{sum}</span>
         )
@@ -29,7 +31,7 @@ export default function Cart({ cart, increaseItemInCart, decreaseItemInCart, del
     return (
         <div>
             {
-                isModalOpen ? <Checkout cartItems={cart} closeModal={closeModal} openModal={openModal} user={user}/>
+                isModalOpen ? <Checkout cartItems={cart} closeModal={closeModal} openModal={openModal} total={total} user={user}/>
                 :
                 <div></div>
             }

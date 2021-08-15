@@ -16,7 +16,7 @@ import Footer from "./Layout/Footer";
 import PleaseLogin from "./Layout/PleaseLogin"
 import Signup from "./Authentication/Signup";
 import Login from "./Authentication/Login";
-import Earn from "./Earn/Earn";
+import Earn from "./Earn/EarnPage";
 import About from "./Pages/About";
 import FourOThree from "./Errors/403";
 
@@ -61,10 +61,10 @@ const mapDispatchToProps = (dispatch) => ({
 
 const Main = (props) => {
     useEffect(() => {
+        console.log("main re-renders")
         props.getAllDishes();
-        
         props.checkIsLoggedIn();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return (
         <div>

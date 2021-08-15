@@ -20,12 +20,22 @@ export default function EditProduct(){
 
     const handleSubmit = (e) =>{
         e.preventDefault();
+        console.log(dish.categories.length)
+        if(dish.categories.length <= 1 || dish.name === "" || dish.description === "" || dish.price === ""){
+                M.toast({ html: "Please enter all fields", classes:"red white-text" })
+                return
+        }
         setIsLoading(!isLoading);
         console.log("hello")
         const token = localStorage.getItem("token");
         const id = window.location.pathname.split("/")[window.location.pathname.split("/").length - 2];
         console.log(dish.categories)
-        dish.categories = dish.categories.replace(/\s+/g, '').split(",");
+        if(Array.isArray(dish.categories)){
+            console.log("category an array")
+        }else{
+            console.log("categories is not array")
+            dish.categories = dish.categories.replace(/\s+/g, '').split(",");
+        }
         fetch(baseUrl + "api/admin/products/"+id, {
             method: "PUT",
             body: JSON.stringify(dish),

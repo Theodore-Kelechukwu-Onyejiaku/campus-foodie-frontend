@@ -285,6 +285,10 @@ button.social-link.google{
     cursor: pointer;
 }
 
+.span-btn{
+    cursor:pointer;
+}
+
 
 
 /* DESKTOP MODE */

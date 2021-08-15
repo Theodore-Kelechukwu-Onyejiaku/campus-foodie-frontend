@@ -25,17 +25,12 @@ const FilterOptions = ({filteration}) =>{
                                 <span>Dinner</span>
                             </label>
                         </p>
-                        <p>
-                            <label>
-                                <input name="filter" type="radio" value="soup" onChange={(e) => { filteration(e) }} />
-                                <span>Soup</span>
-                            </label>
-                        </p>
+                        
                     </div>
 
                     {/* MEAL TIME CATEGORY END */}
 
-                    {/* SOUP CATEGORY START */}
+                    {/* CATEGORY START */}
                     <div className="col s6 m6 l6">
                         <h6 style={{ fontFamily: "serif" }}>Local Dishes</h6>
                         <p>
@@ -70,7 +65,7 @@ const FilterOptions = ({filteration}) =>{
                         <h6 style={{ fontFamily: "serif" }}>Meat</h6>
                         <p>
                             <label>
-                                <input name="filter" type="radio" value="soup" onChange={(e) => { filteration(e) }} />
+                                <input name="filter" type="radio" value="beef" onChange={(e) => { filteration(e) }} />
                                 <span>Beef</span>
                             </label>
                         </p>
@@ -112,14 +107,14 @@ const FilterOptions = ({filteration}) =>{
                         <h6 style={{ fontFamily: "serif" }}>Others</h6>
                         <p>
                             <label>
-                                <input name="filter" type="radio" value="soup" onChange={(e) => { filteration(e) }} />
+                                <input name="filter" type="radio" value="snacks" onChange={(e) => { filteration(e) }} />
                                 <span>Snacks</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input name="filter" value="rice" type="radio" onChange={(e) => { filteration(e) }} />
-                                <span>Inter-continent</span>
+                                <input name="filter" value="inter-continental" type="radio" onChange={(e) => { filteration(e) }} />
+                                <span>Inter-continental</span>
                             </label>
                         </p>
                         <p>

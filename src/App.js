@@ -16,7 +16,7 @@ export default function App(){
       var car = document.querySelectorAll('.carousel');
         
       M.Sidenav.init(elems, {});
-      M.Carousel.init(car, {});
+      M.Carousel.init(car, {}); 
     });
 
 // eslint-disable-next-line react-hooks/exhaustive-deps

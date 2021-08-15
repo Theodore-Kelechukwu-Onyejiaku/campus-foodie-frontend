@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import { Fade, Stagger } from "react-animation-components";
 import naira from "../../images/naira.png"
 
@@ -17,16 +17,18 @@ export default function FoodList({ dishes, addItem }) {
         
         dishes.forEach((eachDish, index, dishes)=>{
             eachDish.categories.forEach((eachCategory)=>{
-                if(eachCategory === e.target.value){
+                if(eachCategory.toLowerCase() === e.target.value.toLowerCase()){
                     filter.push(eachDish)
                 }
             })
         })
 
-        if (filter.length) {
+        if (filter.length > 0) {
+            console.log("something found")
             setNoResult("");
             setDishList(filter);
         } else {
+            console.log("nothing found")
             setNoResult("No Result Found!");
             setDishList([]);
         }
@@ -54,7 +56,7 @@ export default function FoodList({ dishes, addItem }) {
         setDishList([])
         let searchResult = []
         for (let eachDish of dishes) {
-                if (eachDish.name === searchKey) {
+                if (eachDish.name.toLowerCase() === searchKey.toLowerCase()) {
                     searchResult.push(eachDish);
                 }
         }
@@ -83,6 +85,7 @@ export default function FoodList({ dishes, addItem }) {
     const toggleFilter = () =>{
         setIsFilterOpen(!isFilterOpen)
     }
+
     return (
         <div className="row">
             <div className="col s12 m8">

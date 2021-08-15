@@ -4,7 +4,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import pic1 from "../../images/1.jpg"
 import pic2 from "../../images/2.jpg"
 import pic3 from "../../images/3.jpg"
-import pic4 from "../../images/4.jpg"
+import pic4 from "../../images/41.jpg"
 import pic5 from "../../images/5.jpg"
 
 class Slider extends Component {
@@ -12,7 +12,6 @@ class Slider extends Component {
     const options = {
       duration: 300,
       onCycleTo: () => {
-        console.log("New Slide");
       }
     };
     M.Carousel.init(this.Carousel, options);
@@ -24,7 +23,8 @@ class Slider extends Component {
         ref={Carousel => {
           this.Carousel = Carousel;
         }}
-        className="carousel"
+        className="carousel section scrollspy"
+        
       >
         <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic1}/></div>
                 <div class="carousel-item" ><img className="img-slider"  alt="slider" src={pic2}/>

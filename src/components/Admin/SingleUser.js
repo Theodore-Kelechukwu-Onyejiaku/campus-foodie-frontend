@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 import { baseUrl } from "../../shared/baseUrl";
 import AdminTools from "../Layout/AdminTools"
+import M from 'materialize-css/dist/js/materialize.min.js'
+import naira from "../../images/naira.png";
+
 
 
 
@@ -10,13 +14,50 @@ const Display = ({user, title}) =>{
             return <Profile details={user}/>
          
         case "orders":
-            return <Orders orders={user}/>
+            return <Orders user={user}/>
 
         case "account":
             return <Account />
+        case "payments":
+            return <Payments user={user}/>
+        
         default:
             return <div></div>
     }
+}
+
+const Payments = ({user})=>{
+    const [payments, setPayements] = useState([]);
+    const [paymentLoading, setPaymentLoading] = useState(true);
+    useEffect(()=>{
+        fetch(baseUrl + "api/payments/"+user._id,)
+        .then(response => response.json())
+            .then(result =>{
+            console.log(result)
+            if(result.status === "fail"){
+                // M.toast({ html: result.message, classes:"red white-text" })
+            }else{
+                // M.toast({ html: result.message, classes:"green white-text" })
+                console.log(result.payments)
+                setPayements(result.payments)
+                console.log(payments)
+            }
+            setPaymentLoading(false)
+        })
+        .catch(error=>{
+            console.log(error.message)
+            M.toast({ html: error.message, classes:"red white-text" })
+            setPaymentLoading(false)
+        })
+// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+    return(
+        <div>
+            {paymentLoading && <i className="fa fa-spinner fa-spin"></i>}
+
+            <h3>User payments</h3>
+        </div>
+    )    
 }
 
 const Profile = ({details}) =>{
@@ -57,22 +98,75 @@ const Profile = ({details}) =>{
     )
 }
 
-const Orders = ({orders}) =>{
+const Orders = ({user}) =>{
+    
+    console.log(user);
+    // const token = localStorage.getItem("token");
+
+    const [ordersLoading, setOrdersLoading] = useState(true);
+    const [userOrders, setOrders] = useState([]);
+
+    const confirmOrder = ()=>{
+        fetch(baseUrl + "api/order/customer-confirm/"+user._id)
+        .then(response => response.json())
+        .then(result =>{
+            console.log(result);
+            // if(result.status === "fail"){
+            //     M.toast({ html: result.message, classes:"red white-text" })
+            // }else{
+
+            // }
+        })
+    }
+
+    useEffect(()=>{
+        fetch(baseUrl + "api/order/user-orders/"+user._id,)
+        .then(response => response.json())
+            .then(result =>{
+            console.log(result)
+            if(result.status === "fail"){
+                // M.toast({ html: result.message, classes:"red white-text" })
+            }else{
+                // M.toast({ html: result.message, classes:"green white-text" })
+                console.log(result.orders)
+                setOrders(result.orders)
+            }
+            setOrdersLoading(false)
+        })
+        .catch(error=>{
+            console.log(error)
+            M.toast({ html: error.message, classes:"red white-text" })
+            setOrdersLoading(false)
+        })
+
+// eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return(
         <div>
+            {ordersLoading && <i className="fa fa-spinner fa-spin"></i>}
             <table className="responsive-table highlight">
                 <thead>
                     <tr>
                         <th>Date</th>
                         <th>Amount</th>
-                        <th>Quantity</th>
+                        <th>Status</th>
+                        <th>Map</th>
+                        <th>Total Products</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                {orders.length ? orders.map(order =>
+                {userOrders.length ? userOrders.map(order =>
                         <tr>
-                            
+                            <td>{order.createdAt}</td>
+                            <td>{order.amount}</td>
+                            <td>{order.deliveryStatus}</td>
+                            <td><span className="span-btn"><i className="fa fa-eye"></i></span></td>
+                            <td>{order.products.length}</td>
+                            <td>
+                                <button className="btn" onClick={confirmOrder}><i className="fa fa-check"></i></button>
+                                <button className="btn red"><i className="fa fa-close"></i></button>    
+                            </td>
                         </tr>
                     )
                     :
@@ -86,7 +180,11 @@ const Orders = ({orders}) =>{
 
 const Account = () =>{
     return(
-        <div>Account page!</div>
+        <div>
+            <h3>Account Balance: <img src={naira} alt="currency"/>0.00</h3>
+            <Link to="/fund" className="red-text"><u>Want to fund account?</u></Link>
+        </div>
+
     )
 }
 
@@ -109,6 +207,7 @@ const Dropdown = ({titleSetter}) =>{
                         <li className="collection-item list-item"><button className="btn-flat" onClick={()=>{titleSetter("profile")}}>Profile</button></li>
                         <li className="collection-item list-item"><button className="btn-flat" onClick={()=>{titleSetter("orders")}}>Orders</button></li>
                         <li className="collection-item list-item"><button className="btn-flat" onClick={()=>{titleSetter("account")}}>Account</button></li>
+                        <li className="collection-item list-item"><button className="btn-flat" onClick={()=>{titleSetter("payments")}}>Payments</button></li>
                     </ul>
                 </div>
             }

@@ -40,11 +40,11 @@ const AddProduct = ({ dish, postDish }) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
         reader.onloadend = () => {
-            setPreviewSource(reader.result)
-            setFileInputState(reader.result)
-            console.log(fileInputState)
-            setSelectedFile(reader.result)
-            console.log(selectedFile)
+            setPreviewSource(reader.result);
+            setFileInputState(reader.result);
+            console.log(fileInputState);
+            setSelectedFile(reader.result);
+            console.log(selectedFile);
             setFormData(Object.assign({}, formData, { dishPicture: reader.result }));
         }
     }
@@ -147,7 +147,12 @@ const AddProduct = ({ dish, postDish }) => {
                         </div>
                     </div>
                     <div className="center-align">
-                        <button type="submit" className="btn">Submit</button>
+                        {
+                            loading ?
+                                <button type="submit" disabled className="btn"><i className="fa fa-spinner fa-spin"></i></button>
+                            :
+                                <button type="submit" className="btn">Submit</button>
+                        }
                     </div>
                 </form>
                 <br />
