@@ -35,7 +35,7 @@ export default function Header({ cartLength, auth, logoutUser }) {
                 <li><Link to="/orders"><i className="material-icons left">check_box</i>Orders</Link></li>
                 <li><Link to="/notifications"><i className="material-icons left">add_alert</i>Alerts</Link></li>
                 {auth.user.isAdmin ? <li><Link to="/admin/dashboard"><i className="material-icons left">settings</i>Admin</Link></li>
-                  : <li></li>
+                  : ""
                 }
                 <li><Link to="/login" onClick={() => { logoutUser() }}><i className="fa fa-sign-out"></i>Logout</Link></li>
                 <li className="divider"></li>
@@ -75,7 +75,7 @@ export default function Header({ cartLength, auth, logoutUser }) {
           <li><Link to="/notifications"><i className="material-icons left">add_alert</i>Alerts</Link></li>
           <li><Link to="/login" onClick={() => { logoutUser() }}><i className="fa fa-sign-out"></i>Logout</Link></li>
           {auth.user.isAdmin ? <li><Link to="/admin/dashboard"><i className="material-icons left">settings</i>Admin Dashboard</Link></li>
-            : <li></li>
+            : ""
           }
           <li className="divider"></li>
         </ul>

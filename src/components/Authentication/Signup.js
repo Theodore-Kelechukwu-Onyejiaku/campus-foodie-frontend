@@ -22,9 +22,9 @@ export default function Signup({ signupGoogle, signupGoogleError, auth, signupGo
         setPasswordValue(e.target.value);
         setPasswordLength(e.target.value.length);
         if (passwordLength < 6) {
-            if (passwordLength === 1) {
-                M.toast({ html: "Password should be greater than 6", classes: "red white-text" })
-            }
+            // if (passwordLength === 1) {
+            //     M.toast({ html: "Password should be greater than 6", classes: "red white-text" })
+            // }
             setPasswordError("Password should be greater than 6");
             setDisable(true);
         } else {

@@ -1,11 +1,11 @@
-import React,{usestate} from 'react';
+import React,{useState} from 'react';
 import { NavLink } from 'react-router-dom';
 import AccountActivationModal from "../Layout/Modals/AccountActivationModal"
 
 const AccountActivation = ({auth})=>{
     
     console.log(auth);
-    const [isModalOpen , setIsModalOpen] = usestate(true);
+    const [isModalOpen , setIsModalOpen] = useState(true);
     
     const closeModal = ()=>{
         setIsModalOpen(!isModalOpen);
