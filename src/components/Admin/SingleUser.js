@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {Link} from "react-router-dom";
 import { baseUrl } from "../../shared/baseUrl";
-import AdminTools from "../Layout/AdminTools"
+// import AdminTools from "../Layout/AdminTools"
 import M from 'materialize-css/dist/js/materialize.min.js'
 import naira from "../../images/naira.png";
 
@@ -9,6 +9,7 @@ import naira from "../../images/naira.png";
 
 
 const Display = ({user, title}) =>{
+    console.log("this is the user "+JSON.stringify(user))
     switch(title){
         case "profile":
             return <Profile details={user}/>
@@ -27,18 +28,16 @@ const Display = ({user, title}) =>{
 }
 
 const Payments = ({user})=>{
+    console.log("USEr" +user.user.email)
     const [payments, setPayements] = useState([]);
     const [paymentLoading, setPaymentLoading] = useState(true);
     useEffect(()=>{
-        fetch(baseUrl + "api/payments/"+user._id,)
+        fetch(baseUrl + "api/payment/"+user.user._id)
         .then(response => response.json())
-            .then(result =>{
-            console.log(result)
+        .then(result =>{
             if(result.status === "fail"){
-                // M.toast({ html: result.message, classes:"red white-text" })
+                M.toast({ html: result.message, classes:"red white-text" })
             }else{
-                // M.toast({ html: result.message, classes:"green white-text" })
-                console.log(result.payments)
                 setPayements(result.payments)
                 console.log(payments)
             }
@@ -107,7 +106,7 @@ const Orders = ({user}) =>{
     const [userOrders, setOrders] = useState([]);
 
     const confirmOrder = ()=>{
-        fetch(baseUrl + "api/order/customer-confirm/"+user._id)
+        fetch(baseUrl + "api/order/customer-confirm/"+user.user._id)
         .then(response => response.json())
         .then(result =>{
             console.log(result);
@@ -120,7 +119,7 @@ const Orders = ({user}) =>{
     }
 
     useEffect(()=>{
-        fetch(baseUrl + "api/order/user-orders/"+user._id,)
+        fetch(baseUrl + "api/order/user-orders/"+user.user._id,)
         .then(response => response.json())
             .then(result =>{
             console.log(result)
@@ -216,48 +215,16 @@ const Dropdown = ({titleSetter}) =>{
     )
 }
 
-const SingleUser = () =>{
-    const [user, setUser] = useState({})
+const SingleUser = (user) =>{
     const [title, setTitle ] = useState("profile")
     const titleSetter = (title)=>{
         setTitle(title)
         
-    }
-    useEffect(()=>{
-            const token = localStorage.getItem("token");
-            const id = window.location.pathname.split("/")[window.location.pathname.split("/").length - 1];
-            console.log(id);
-            fetch(baseUrl + "api/admin/users/"+id, {
-                headers: {
-                    'Accept': 'application/json',
-                    "Content-type": "application/json",
-                    'Authorization': 'Bearer ' + token,
-                }
-            })
-                .then(response => {
-                    if (response.ok) return response.json();
-                    else {
-                        const error = new Error()
-                        error.message = "Something went wrong!";
-                        throw error;
-                    }
-                })
-                .then(async (result) => {
-                    if(result.status === "fail"){
-                      return  console.log(result.message)
-                    }
-                    return setUser(result.user)
-                })
-                .catch(error => {
-                    console.log(error.message)
-                })
-    }, [])
-
-    
+    }    
     
     return(
         <div className="container">
-            <AdminTools/>
+            {/* <AdminTools/> */}
             <div className="row" style={{margin:"3% auto"}}>
                 <div className="col s12 m4">
                     <Dropdown titleSetter={titleSetter}/>

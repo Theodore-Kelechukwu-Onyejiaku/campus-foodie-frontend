@@ -1,16 +1,15 @@
-import React,{useState} from 'react';
+import React from 'react';
 // import { baseUrl } from "../../shared/baseUrl";
 
 
 import SingleUser from "../Admin/SingleUser";
 
 
-const Profile = (auth) =>{
-        const [user] = useState(auth.user)
-
+const Profile = ({auth}) =>{
+        
         return(
             <div>
-                <SingleUser user={user}/>
+                <SingleUser user={auth.user}/>
             </div>
         )
 }
